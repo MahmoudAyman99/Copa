@@ -9,7 +9,7 @@ import { Icount } from '../../../shared/interfaces/icount';
 @Component({
   selector: 'app-moderator-dashboard',
   standalone: true,
-  imports: [NgChartsModule, CommonModule],
+  imports: [ NgChartsModule,CommonModule],
   templateUrl: './moderator-dashboard.component.html',
   styleUrl: './moderator-dashboard.component.scss'
 })
