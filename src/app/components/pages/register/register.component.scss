@@ -1,0 +1,33 @@
+.register{
+    height: 100vh;
+    background-image: url('../../../../assets/images/dark.jpeg');
+    background-position:center;
+}
+
+a ,p{
+    font-size: 26px;
+}
+p a {
+    color: var(--main-color);
+}
+a:hover{
+    margin-left: 3px;
+    text-shadow: 0px 0px 25px var(--main-color);
+    transition-duration: .3s;
+}
+.btn-submit{
+    width: 35%;
+}
+
+
+
+
+@media (max-width: 992px) {
+    
+    a ,p{
+        font-size: 22px;
+    }
+    .btn-submit{
+        width: 60%;
+    }
+  }

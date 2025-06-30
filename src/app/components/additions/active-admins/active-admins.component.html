@@ -1,0 +1,84 @@
+
+@if (Mode === 'none') {
+<div class="px-4">
+  <h1 class="light-color text-center py-2">Active Admins</h1>
+
+  <div class="table-responsive">
+    <table class="table w-100 text-center align-middle">
+      <thead>
+        <tr class="head fs-3">
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Phone</th>
+          <th>joined As Admin From</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (admin of admins; track $index) {
+                  <tr class="light-color fs-5">
+          <td>{{admin.fullname}}</td>
+          <td>{{admin.age}}</td>
+          <td>{{admin.phonenumber}}</td>
+          <td>{{admin.joinedAsAdminFrom}}</td>
+             <td class="position-relative" #menu>
+  <div class="icon-menu-wrapper" #menuWrapper>
+    <i
+      class="fa-solid fa-dice-two fs-4 cursor-pointer menu-toggle-icon"
+      (click)="toggleActions(admin.id)">
+    </i>
+
+    <div class="icon-actions" *ngIf="openIndex === admin.id">
+      <i class="fa-solid fa-trash text-danger cursor-pointer" (click)="deleteAdmin(admin.id)" title="To delete"></i>
+      <i class="fa-solid fa-eye cursor-pointer" (click)="setMode('view') ; getSelectAdmin(admin.id)" title="View"></i>
+    </div>
+  </div>
+</td>
+
+
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+}
+
+@if (Mode == 'view' && selectAdmin) {
+  <div class="position-relative dashboard">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="setMode('none')"></i>
+            <div class="row d-flex align-items-center">
+              <div class="col-md-4 p-4  ms-auto">
+                <div >
+                    <img [src]="selectAdmin.pictureUrl" alt="Player Picture"  class="w-100 rounded-circle picture border-1 bg-black ">
+                </div>
+              </div>
+              <div class="col-md-5 ms-auto">
+                    <div class=" text-center text-md-start row light-color py-4">
+                        <div class="col-md-12 p-2">
+                          <div class="d-flex flex-column">
+                            <span class="fs-1 text-uppercase">{{selectAdmin.fullname}}</span>
+                          <span class="fs-3 mb-2 text-success">{{selectAdmin.username}}</span> 
+                          </div>
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Age : <span class="fs-5">{{selectAdmin.age}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Phone : <span class="fs-5">{{selectAdmin.phonenumber}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Email : <span class="fs-5">{{selectAdmin.email}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Status : <span class="fs-5">{{selectAdmin.status}}</span></span>
+                        </div>
+                </div>
+            </div>
+            </div>
+  </div>
+}

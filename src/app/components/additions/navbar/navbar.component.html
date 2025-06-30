@@ -1,0 +1,63 @@
+<nav class="navbar  navbar-expand-lg container bg-light-color   my-lg-4 py-2 py-lg-0 fixed-top z-3 ">
+    <div class="container  ">
+      <a class="navbar-brand d-flex align-items-center ">
+        <img src="./assets/images/logopng.png" alt="logopng" width="80px">
+        <span class="fs-3">Copa</span>
+      </a>
+      <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-lg-around text-center" id="navbarNav">
+        <ul class="navbar-nav ">
+          <li class="nav-item">
+            <a class="nav-link  " aria-current="page" routerLink ="/home" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown position-relative">
+            <a class="dropbtn nav-link cursor-pointer">Discover
+              <i class="fa-solid fa-angle-down fs-6"></i> </a>
+            <div class="dropdown-content">
+                <a  class="light-color py-2 fs-5" routerLink ="/players">
+                  <i class="fa-solid fa-person-running px-2"></i>
+                  Players</a>
+                <a  class="light-color py-2 fs-5" routerLink ="/clubs">
+                  <i class="fa-solid fa-futbol px-2"></i>
+                  Clubs
+                </a>
+            </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink ="/successStories" routerLinkActive="active">Success 
+                Stories</a>
+          </li>
+          @if (isLogin) {
+            <li class="nav-item">
+            <a class="nav-link" routerLink ="/subscribe" routerLinkActive="active">Subscribe</a>
+          </li>
+          }
+          <li class="nav-item">
+            <a class="nav-link" routerLink ="/contactUs" routerLinkActive="active">contact us
+            </a>
+          </li>
+         
+        </ul>
+        <div class="d-flex align-items-center">
+          @if (!isLogin) {
+              <a class="nav-link mx-md-3" routerLink ="/login" routerLinkActive="active" >Log In </a>
+              <a class="nav-link ms-auto ms-md-0" routerLink ="/register" routerLinkActive="active" >Register </a>
+        }
+        @if (isLogin) {
+          <a href="" routerLink="/profile"> <img [src]="profileImg"  class="img-profile rounded-circle border-1 border border-black bg-black"></a>
+          @if (isAdmOrModOrMan) {
+            <i class="fa-solid fa-gear nav-link ms-4 cursor-pointer fs-3"routerLink ="/settings" ></i>
+          }
+          <a class="logout ms-4 rounded-circle" (click)="signOut()"><i class="fa-solid fa-right-from-bracket fs-3 ms-1"></i> </a>
+        }
+         
+        
+        </div>
+        
+      </div>
+    </div>
+  </nav>

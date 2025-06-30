@@ -1,0 +1,122 @@
+section{
+    font-family: "Inika", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header1{ 
+  height: 100vh;
+  background-image: url('../../../../assets/images/bg2.png');
+  background-position: center;
+  background-size: cover;
+}
+.header2{ 
+  height: 100vh;
+  background-image: url('../../../../assets/images/bg1.png');
+  background-position: center;
+  background-size: cover;
+}
+
+
+
+.about h1 , .achive h1{
+    color: var(--main-color);
+    font-weight: bolder;
+}
+.about .image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  .image-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 30px;
+    background-color: black; 
+    clip-path: path("M0,0 C80,25 220,25 300,0 L300,0 L0,0 Z");
+    z-index: 2;
+  }
+  .young-players{
+    background-image: url('../../../../assets/images/young players.png');
+    background-size: cover;
+    background-color: #000;
+    min-height: 100vh;
+    background-position: center center;
+}
+
+
+  .achive { 
+    padding-top: 50px ;
+    background: linear-gradient(to bottom, black, #068306);
+  }
+.achive p {
+    width: 75%;
+}
+
+
+.clubs{
+    padding-top: 50px ;
+    padding-bottom: 50px ;
+    background: linear-gradient(to bottom,  #068306 , #001300 , #000000  );
+}
+.club-card{
+  width: 75%;
+  height: 400px;
+    cursor: pointer;
+    background-color: var(--main-color);
+    border-radius: 20px;
+}
+.club-card:hover .staduim{
+    transition-duration: .8s;
+    transform: scale(1.2);
+}
+.club-card .staduim{
+    height: 140px;
+}
+.logo{
+  width: 35%;
+    text-align: center;
+    height: 80px;
+}
+
+.players{
+ padding: 50px 0;
+ background: linear-gradient(to right,#04720471 , #03490371 ,black);
+}
+
+.carousel-control-prev , .carousel-control-next{
+    color: var(--main-color);
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: var(--main-color);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+
+
+
+
+  @media (max-width: 992px) {
+    .achive p {
+        width: 100%;
+    }
+  }

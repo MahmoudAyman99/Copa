@@ -1,0 +1,110 @@
+@if (Mode === 'none') {
+  <div class="w-75 d-flex justify-content-around mx-auto">
+    <button class="section-btn px-3"  [ngClass]="{ 'selected' : currentPlayersTab === 'active' }" (click)="setPlayersTab('active') ; getActivePlayers()">Active</button>
+    <button class="section-btn px-3"  [ngClass]="{ 'selected' : currentPlayersTab === 'binned' }" (click)="setPlayersTab('binned') ; getBinnedPlayers()">Binned</button>
+</div>
+
+
+  <div class="p-4">
+  <h1 class="light-color text-center py-2">@if (currentPlayersTab === 'active') {Active } 
+     @if (currentPlayersTab === 'binned') {Binned } 
+      Players</h1>
+
+  <div class="table-responsive">
+    <table class="table w-100 text-center align-middle">
+      <thead>
+        <tr class="head fs-3">
+          <th>Image</th>
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Phone</th>
+          <th>Position</th>
+          <th *ngIf="currentPlayersTab === 'binned'">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+@for (player of players ; track $index ;) {
+          <tr class="light-color fs-4">
+          <td><img [src]="player.profilePictureUrl" alt="player Image" width="50px" height="50px" class="rounded-circle bg-black"></td>
+          <td>{{player.fullname}}</td>
+          <td>{{player.age}}</td>
+          <td>{{player.phone}}</td>
+          <td>{{player.position}}</td>
+          <td *ngIf="currentPlayersTab === 'binned'">
+            <i class="fa-solid fa-circle-xmark text-danger cursor-pointer" title="To Reject" (click)="rejectPlayer(player.id)"></i>
+        <i class="fa-solid fa-circle-check text-success cursor-pointer mx-2" title="To Accept" (click)="acceptPlayer(player.id)"></i>
+        <i class="fa-solid fa-eye cursor-pointer" (click)="setMode('view') ; getSelectPlayer(player.id)"  title="View"></i>
+        
+  </td>
+
+
+        </tr>
+}
+      </tbody>
+    </table>
+  </div>
+</div>
+}
+
+@if (Mode === 'view') {
+    <div class="position-relative dashboard">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="setMode('none')"></i>
+            <div class="row d-flex align-items-center gy-3">
+              <div class="col-md-4 p-4  ms-auto">
+                <div class="d-flex justify-content-center">
+                    <img [src]="selectPlayer.profilePictureUrl" alt="Player Picture"  class="rounded-circle border-1 bg-black picture ">
+                </div>
+              </div>
+              <div class="col-md-5 ms-auto">
+                    <div class=" text-center text-md-start row light-color py-4">
+                        <div class="col-md-12 p-2">
+                    <span class="fs-1 mb-2 text-uppercase">{{selectPlayer.fullname}}</span>
+                    
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Age : <span class="fs-5">{{selectPlayer.age}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Phone : <span class="fs-5">{{selectPlayer.phone}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Email : <span class="fs-5">{{selectPlayer.email}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Position : <span class="fs-5">{{selectPlayer.position}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Status : <span class="fs-5">{{selectPlayer.status}}</span></span>
+                        </div>
+                        
+                </div>
+                </div>
+            </div>
+             <div class="col-md-10 mx-auto ">
+               @if (selectPlayer.videoUrl === 'Video not uploaded ') {
+                        <h2 class="py-3 text-center light-color">{{ selectPlayer?.fullname }} has not uploaded a video</h2>
+                    } @else {
+                        <h2 class="py-3 text-center light-color">{{ selectPlayer?.fullname }} Video</h2>
+                <div>
+                    <iframe   allowfullscreen allow=" encrypted-media"[src]="selectPlayer.safeVideoUrl"class="w-100"height="500px"></iframe>
+                </div>
+}
+
+            </div>
+            <div class="col-md-6 mx-auto py-2">
+                  <div class="d-flex justify-content-around">
+                    <button  type="button" class="btn btn-danger" (click)="rejectPlayer(selectPlayer.id)">Reject</button>
+                    <button  type="button" class="btn btn-success" (click)="acceptPlayer(selectPlayer.id)">Accept</button>
+                    
+                  </div>
+            </div>
+            </div>
+  </div>
+}

@@ -1,0 +1,62 @@
+.fsection{
+    background-image: url('../../../../assets/images/players.jpg');
+    background-size: cover;
+    background-color: #000;
+    min-height: 100vh;
+    background-position: top center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+.players-section{
+    background-color: #012201;
+}
+
+.address{
+    color: var(--main-color);
+    font-weight: bold;
+    text-align: center;
+}
+.about-address{
+    color: var(--light-color);
+    text-align: center;
+    width: 45%;
+    margin: auto;
+}
+.player-card{
+    width: 100%;
+}
+
+.title-banner {
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 72px;
+    font-family: "Inika", serif;
+    line-height: 82px;
+    margin-bottom: 24px;
+}
+.pre-title {
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 10px 29px;
+    border-radius: 8px;
+}
+
+
+
+
+@media (max-width: 992px) {
+   
+    .title-banner{
+        font-size: 42px;
+    }
+    .about-address{
+        width: 90%;
+    }
+    .player-card{
+        width: 90%;
+        margin: auto;
+    }
+  }

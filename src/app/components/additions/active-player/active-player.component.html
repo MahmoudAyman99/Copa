@@ -1,0 +1,221 @@
+@if (Mode === 'none') {
+  <div class="px-4">
+  <h1 class="light-color text-center py-2">Active Players</h1>
+
+  <div class="table-responsive">
+    <table class="table w-100 text-center align-middle">
+      <thead>
+        <tr class="head fs-3">
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Phone</th>
+          <th>Number</th>
+          <th>Position</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+@for (player of activePlayers ; track $index ;) {
+          <tr class="light-color fs-4">
+          <td>{{player.fullname}}</td>
+          <td>{{player.age}}</td>
+          <td>{{player.phone}}</td>
+          <td>{{player.number}}</td>
+          <td>{{player.position}}</td>
+          <td class="position-relative">
+    <div class="icon-menu-wrapper" #menuWrapper>
+
+      <i
+        class="fa-solid fa-dice-three fs-4 cursor-pointer menu-toggle-icon"
+        (click)="toggleActions(player.id)">
+      </i>
+
+      <div class="icon-actions" *ngIf="openIndex === player.id">
+        <i class="fa-solid fa-pen-to-square text-warning cursor-pointer" (click)="setMode('update') ; getPlayerId(player.id)" title="Update"></i>
+        <i class="fa-solid fa-trash text-danger cursor-pointer" (click)="deletePlayer(player.id)" title="To Delete"></i>
+        <i class="fa-solid fa-eye cursor-pointer" (click)="setMode('view') ; getSelectPlayer(player.id)" title="View"></i>
+      </div>
+    </div>
+  </td>
+
+
+        </tr>
+}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+}
+
+@if (Mode == 'update') {
+  <form class="position-relative dashboard" [formGroup]="updatePlayerForm" (ngSubmit)="updatePlayer()">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="setMode('none')"></i>
+            <div class="row g-3 ">
+          <div class="col-md-10 mx-auto">
+      <input
+        type="number"
+        formControlName="Number"
+        placeholder="Number"
+        min="1"
+        max="99"
+        oninput="this.value = Math.max(1, Math.min(99, this.value))"
+      />
+    </div>
+          <div class="col-md-10 mx-auto">
+      <input
+        type="number"
+        formControlName="Price"
+        placeholder="Price"
+        min="1"
+      />
+    </div>
+    <div class="col-md-10 mx-auto">
+      <div class="position-box d-flex justify-content-between bg-white p-2 rounded-3">
+        <label for="position" class="fs-5">Position</label>
+        <select
+          id="position"
+          formControlName="PositionId"
+          class="rounded-3 px-2 cursor-pointer fw-bolder bg-black light-color"
+        >
+          <option value="" selected disabled hidden class="light-color">choose player Position</option>
+          @for (position of positions; track $index) {
+            <option [value]="position.value">{{ position.text }}</option>
+          }
+        </select>
+      </div>
+      
+    </div>
+    <div class="col-md-10 mx-auto">
+      <div class="position-box d-flex justify-content-between bg-white p-2 rounded-3">
+         <label id="IsAvailableForSale" class="fs-5">Is Available For Sale?</label>
+  <select
+    formControlName="IsAvailableForSale"
+    for ="IsAvailableForSale"
+    class="rounded-3 px-2 cursor-pointer fw-bolder bg-black light-color"
+  >
+    <option value="" disabled selected hidden class="light-color">Choose...</option>
+    <option [value]="true">Yes</option>
+    <option [value]="false">No</option>
+  </select>
+      </div>
+      <div class="col-md-10 mx-auto">
+ 
+</div>
+    </div>
+    <div class="col-md-10 mx-auto">
+      <label for="ContractDuration" class="light-color fs-5 pb-2">Contract Duration End:</label>
+      <input type="date" formControlName="ContractDuration" />
+    </div>
+    
+     <div class="col-md-10 mx-auto">
+      <label class="custom-upload cursor-pointer light-color">Contract Picture</label>
+      <input
+        type="file"
+        accept="image/*"
+        class="bg-white text-black"
+        (change)="onFileChange($event, 'ContractPictureUrl')"
+      />
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <label class="custom-upload cursor-pointer light-color">Player Video</label>
+      <input
+        type="file"
+        accept="video/*"
+        class="bg-white text-black"
+        (change)="onFileChange($event, 'Video')"
+      />
+    </div>
+    <div class="col-md-7 mx-auto">
+      <div class="d-flex justify-content-center">
+        <button
+          class="btn-submit w-25"
+          type="submit"
+          [disabled]="
+            updatePlayerForm.invalid ||
+            loading ||
+            !contractImageFile 
+          "
+        >
+          @if (loading) {
+            Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+          } @else {
+            Update
+          }
+        </button>
+      </div>
+    </div>
+
+            </div>
+  </form>
+}
+
+@if (Mode == 'view' && selectPlayer) {
+  <div class="position-relative dashboard">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="setMode('none')"></i>
+            <div class="row d-flex align-items-center">
+              <div class="col-md-4 p-4  ms-auto">
+                <div class="d-flex justify-content-center">
+                    <img [src]="selectPlayer.profilePictureUrl" alt="Player Picture"  class="rounded-circle border-1 bg-black picture ">
+                </div>
+              </div>
+              <div class="col-md-5 ms-auto">
+                    <div class=" text-center text-md-start row light-color py-4">
+                        <div class="col-md-12 p-2">
+                    <span class="fs-1 mb-2 text-uppercase">{{selectPlayer.fullname}}</span>
+                    
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Age : <span class="fs-5">{{selectPlayer.age}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Phone : <span class="fs-5">{{selectPlayer.phone}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Email : <span class="fs-5">{{selectPlayer.email}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Position : <span class="fs-5">{{selectPlayer.position}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Number : <span class="fs-5">{{selectPlayer.number}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Joined Club On : <span class="fs-5">{{selectPlayer.joinedClubOn}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Status : <span class="fs-5">{{selectPlayer.status}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Is Avaliable For Sale : <span class="fs-5">{{selectPlayer.isAvaliableForSale}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 " *ngIf="selectPlayer.price != 0">Price : <span class="fs-5">{{selectPlayer.price}}</span></span>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-10 mx-auto ">
+               @if (selectPlayer?.videoUrl === 'No uploaded videos found') {
+                        <h2 class="py-3 text-center light-color">{{ selectPlayer?.fullname }}  has no video</h2>
+                    } @else {
+                        <h2 class="py-3 text-center light-color">{{ selectPlayer?.fullname }} Video</h2>
+                <div>
+                    <iframe   allowfullscreen allow="  encrypted-media"[src]="selectPlayer?.safeVideoUrl"class="w-100"height="500px"></iframe>
+                </div>
+}
+
+            </div>
+            </div>
+  </div>
+}
+

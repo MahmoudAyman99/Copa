@@ -1,0 +1,96 @@
+<section class="position-relative overflow-hidden club-form py-5">
+    <i class="fa-solid fa-circle-left back fs-1" (click)="goBack()"></i>
+    <div class="club-form-background-layer"></div>
+<form [formGroup]="clubForm" (ngSubmit)="onSubmit()" class="form position-relative" >
+  <h1 class="text-center light-color py-3">Add your club</h1>
+
+  <div class="row p-3 g-4 g-md-3">
+
+    <div class="col-md-6 p-3">
+      <input type="text" formControlName="clubName" placeholder="Club Name" class="form-control" />
+       @if (clubForm.get("clubName")?.errors && clubForm.get("clubName")?.touched) {
+            @if (clubForm.get("clubName")?.getError("required")) {
+                                            <span class="error">Club Name is required</span>
+                                        }
+                                         @else if (clubForm.get("clubName")?.getError("minlength")) {
+                                            <span class="error">minLength  : 5</span>
+                                        }
+                                         @else if (clubForm.get("clubName")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :128 </span>
+                                        }
+          }
+    </div>
+
+    <div class="col-md-6 p-3">
+      <input type="text" formControlName="about" placeholder="About" class="form-control" />
+      @if (clubForm.get("about")?.errors && clubForm.get("about")?.touched) {
+            @if (clubForm.get("about")?.getError("required")) {
+                                            <span class="error">About is required</span>
+                                        }
+                                         @else if (clubForm.get("about")?.getError("minlength")) {
+                                            <span class="error">minLength  : 5</span>
+                                        }
+                                         @else if (clubForm.get("about")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :1024 </span>
+                                        }
+          }
+    </div>
+    <div class="col-md-7 mx-auto p-3">
+      <input type="text" formControlName="story" placeholder="Story" class="form-control" />
+       @if (clubForm.get("story")?.errors && clubForm.get("story")?.touched) {
+            @if (clubForm.get("story")?.getError("required")) {
+                                            <span class="error">Story is required</span>
+                                        }
+                                         @else if (clubForm.get("story")?.getError("minlength")) {
+                                            <span class="error">minLength  : 5</span>
+                                        }
+                                         @else if (clubForm.get("story")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :5000 </span>
+                                        }
+          }
+          
+    </div>
+
+    <!-- Logo -->
+    <div class="col-md-6 p-3">
+      <label class="custom-upload cursor-pointer">Add Logo</label>
+      <input type="file" (change)="onFileChange($event, 'logo')" accept="image/*" class="form-control" />
+      <div *ngIf="logoInvalid" class="text-danger">Logo is required.</div>
+    </div>
+
+    <!-- Main Shirt -->
+    <div class="col-md-6 p-3">
+      <label class="custom-upload cursor-pointer">Add Main Shirt</label>
+      <input type="file" (change)="onFileChange($event, 'mainShirt')" accept="image/*" class="form-control" />
+      <div *ngIf="mainShirtInvalid" class="text-danger">Main Shirt is required.</div>
+    </div>
+
+    <!-- Team Picture -->
+    <div class="col-md-7 mx-auto p-3">
+      <label class="custom-upload cursor-pointer">Add Team Picture</label>
+      <input type="file" (change)="onFileChange($event, 'clubPicture')" accept="image/*" class="form-control" />
+      <div *ngIf="clubPictureInvalid" class="text-danger">Team Picture is required.</div>
+    </div>
+
+    <div class="col-md-7 mx-auto d-flex justify-content-center align-items-center">
+      <button class="btn fs-4 cursor-pointer"   [disabled]="clubForm.invalid">
+        Add
+      </button>
+    </div>
+
+  </div>
+</form>
+
+</section>

@@ -1,0 +1,30 @@
+.logo{
+    width: 120px;
+    height: 120px;
+}
+.edit{
+    color: var(--light-color);
+}
+.edit:hover{
+    color: var(--main-color);
+    transition-duration: .5s;
+}
+.img-edit{
+    border-radius: 10px;
+    border-bottom-right-radius: 120px;
+}
+.img-icon{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(50%);
+    background-color: black ;
+    color: var(--light-color);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.img-icon:hover{
+    transition-duration: .5s;
+    color: var(--main-color);
+}

@@ -1,0 +1,137 @@
+.dashboard{
+  height: 100vh;
+  position: relative;
+}
+.nav{
+  z-index: 99;
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  background-color: var(--light-color);
+}
+.nav-content{
+   background: linear-gradient(to right, #004422, #0d0d0d);
+  color: white;
+  border-bottom-left-radius: 30px;
+}
+.nav-content:hover{
+   background: linear-gradient(to left, #004422, #0d0d0d);
+   transition-duration: .5s;
+}
+.container{
+  margin-top: 50px;
+  margin-bottom: 80px;
+}
+.div{
+  
+  background-image: url('../../../../assets/images/dashboard.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  margin-top: 50px;
+}
+.side-bar .name {
+    font-family: "Vast Shadow", serif;
+    font-weight: 900;
+    font-style: normal;
+    color: var(--light-color);
+  }
+.side-bar {
+    z-index: 999;
+    position: relative;
+    height: 50px;
+    display: flex;
+  
+  
+    .side-bar-content {
+      background: linear-gradient(to bottom, black,  #001C12,#004422  );
+      opacity: 1;
+      width: 200px;
+      min-height: 100vh;
+      padding: 0 ;
+    }
+  .side-bar-header{
+    height: 50px;
+    display: none;
+  }
+  }
+
+  .links a , .footer a{
+    font-size: 20px;
+    transition: color .3s;
+    color: var(--light-color);
+  }
+:where(.footer , .links ) a:hover{
+    color: var(--main-color);
+  }
+
+.selected{
+  color: var(--main-color) !important;
+  text-shadow: 0px 0px 25px var(--main-color);
+}
+.btns{
+  width: 50%;
+}
+.btn{
+  width: 100px;
+  height: 40px;
+  background-color: #016634;
+  color: var(--light-color);
+  border-radius: 0 0 10px 10px;
+}
+.btn:hover{
+  height: 70px;
+  transition-duration: .5s;
+}
+.btn-selected{
+  height: 70px;
+}
+
+
+
+
+
+  // الوضع في الشاشات الصغيرة (موبايل)
+  @media (max-width: 991.98px) {
+.side-bar {
+    z-index: 999;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 50px;
+    display: flex;
+  
+  
+    .side-bar-content {
+      background: linear-gradient(to bottom, black, rgb(15, 9, 9), #023302, #068306);
+      transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s ease ,width 0.5s ease ;
+      transform: translateX(-100%);
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+      padding: 0 ;
+    }
+  .side-bar-header{
+    height: 50px;
+    display: flex;
+  }
+    &.open {
+      height: 100vh;
+      top: 0;
+      transform: translateY(0);
+      .side-bar-content {
+        width: 200px;
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  .btns{
+    width: 75%;
+  }
+  .btn {
+    width: 80px;
+  }
+  }

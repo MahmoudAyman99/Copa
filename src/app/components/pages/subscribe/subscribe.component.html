@@ -1,0 +1,237 @@
+<app-navbar></app-navbar>
+<section class="fsection d-flex align-items-center position-relative">
+    <div class="position-absolute top-0 bottom-0 w-100 bg-black opacity-50"></div>
+    <div class="row w-100 mx-auto ">
+      <div class="col-md-8 text-center mx-auto">
+        <h1 class="reveal z-3 light-color fw-bold">Subscribe with us</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="subscribe py-5">
+      <h1 class="my-4">Join Us As </h1>
+      <div class="w-75  mx-auto d-flex justify-content-around">
+        <button class="btn fs-4 fw-bolder " (click)="goManagerForm()" [ngClass]="{ 'selected' : showManagerForm }">An Manager</button>
+        <button class="btn fs-4 fw-bolder" (click)="goPlayerForm()" [ngClass]="{ 'selected' : showPlayerForm }">A Player</button>
+      </div>
+      <div class="container py-4">
+        <div class="subscribe-form rounded-4 overflow-hidden my-5  reveal2">
+@if (showPlayerForm) {
+            <form class="player-form d-flex flex-column align-items-center" [formGroup]="createPlayerForm" (ngSubmit)="subscribeAsPlayer()">
+        <div class="form-container row g-md-5 g-3">
+          <div class="col-md-6 p-3">
+            <input type="text" placeholder="Nick Name" formControlName="Nickname">
+               @if (createPlayerForm.get('Nickname')?.errors && createPlayerForm.get('Nickname')?.touched) 
+                    {
+                        @if (createPlayerForm.get("Nickname")?.getError("required")) {
+                                            <span class="error">Nick name is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("Nickname")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (createPlayerForm.get("Nickname")?.getError("minlength")) {
+                                            <span class="error">Nick name must be 6 chr. at least !</span>
+                                        }
+                                        @else  if (createPlayerForm.get("Nickname")?.getError("maxlength")) {
+                                            <span class="error">Nick name can't be more than 256 chr</span>
+                                        }
+                        
+                    }
+          </div>
+          <div class="col-md-6 p-3">
+            <input type="text" placeholder="Phone number" formControlName="PhoneNumber">
+             @if (createPlayerForm.get('PhoneNumber')?.errors && createPlayerForm.get('PhoneNumber')?.touched) 
+                    {
+                        @if (createPlayerForm.get("PhoneNumber")?.getError("required")) {
+                                            <span class="error">Phone Number is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("PhoneNumber")?.getError("pattern")) {
+                                            <span class="error">Must be Phone Number</span>
+                                        }
+                        
+                    }
+          </div>
+          <div class="col-md-6 p-3">
+            <div class="upload-box">
+  <label for="video-upload" class="custom-upload cursor-pointer">
+    <p>Add video</p>
+  </label>
+  <input
+        type="file"
+        accept="video/*"
+        class="bg-white text-black"
+        (change)="onFileChange($event, 'Video')"
+      />
+</div>
+          </div>
+          <div class="col-md-6 p-3">
+            <div class="upload-box">
+  <label for="photo-upload" class="custom-upload cursor-pointer">
+    <p>Add photo</p>
+  </label>
+  <input
+        type="file"
+        accept="image/*"
+        class="bg-white text-black"
+        (change)="onFileChange($event, 'Picture')"
+      />
+</div>
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <div class="position-box d-flex justify-content-between">
+             <label for="position" class="fs-5">Position</label>
+        <select
+          id="position"
+          formControlName="PositionId"
+          class="rounded-3 px-2 cursor-pointer fw-bolder bg-black light-color"
+        >
+          <option value="" selected disabled hidden class="light-color">choose player Position</option>
+          @for (position of positions; track $index) {
+            <option [value]="position.value">{{ position.text }}</option>
+          }
+    </select>
+    @if (createPlayerForm.get('PositionId')?.errors && createPlayerForm.get('PositionId')?.touched) 
+                    {
+                        @if (createPlayerForm.get("PositionId")?.getError("required")) {
+                                            <span class="error">Position is required</span>
+                                        }
+                                         
+                    }
+  </div>
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <textarea placeholder="Type Your story" formControlName="StoryAbout"></textarea>
+               @if (createPlayerForm.get('StoryAbout')?.errors && createPlayerForm.get('StoryAbout')?.touched) 
+                    {
+                        @if (createPlayerForm.get("StoryAbout")?.getError("required")) {
+                                            <span class="error">Story About is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("StoryAbout")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                         @else if (createPlayerForm.get("StoryAbout")?.getError("minlength")) {
+                                            <span class="error">Story About must be 6 chr. at least !</span>
+                                        }
+                                        @else  if (createPlayerForm.get("StoryAbout")?.getError("maxlength")) {
+                                            <span class="error">Story About can't be more than 5000 chr</span>
+                                        }
+                        
+                    }
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <textarea placeholder="Type Your Preef About " formControlName="PreefAbout"></textarea>
+               @if (createPlayerForm.get('PreefAbout')?.errors && createPlayerForm.get('PreefAbout')?.touched) 
+                    {
+                        @if (createPlayerForm.get("PreefAbout")?.getError("required")) {
+                                            <span class="error">Preef About is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("PreefAbout")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                         @else if (createPlayerForm.get("PreefAbout")?.getError("minlength")) {
+                                            <span class="error">PreefAbout be 5 chr. at least !</span>
+                                        }
+                                        @else  if (createPlayerForm.get("PreefAbout")?.getError("maxlength")) {
+                                            <span class="error">PreefAbout  can't be more than 5000 chr</span>
+                                        }
+                        
+                    }
+          </div>
+
+    
+</div>
+      <button class="btn-submit fs-5 w-25 mb-3" [disabled]="createPlayerForm.invalid || loading ">
+        @if (loading) {
+            Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+            } @else {
+            Subscribe
+             }
+      </button>
+      </form>
+}
+@if (showManagerForm) {
+            <form class="player-form d-flex flex-column align-items-center" [formGroup]="managerForm" (ngSubmit)="subscribeAsManager()">
+        <div class="form-container row g-md-5 g-3">
+          <div class="col-md-6 g-5 mx-auto inputs">
+                            <label for="appoitmentDate" class="light-color fs-5 pb-2">Appointment Date:</label>
+                            <input type="date" name="appoitmentDate" formControlName="appoitmentDate">
+                               @if (managerForm.get('appoitmentDate')?.errors && managerForm.get('appoitmentDate')?.touched) 
+                    {
+                        @if (managerForm.get("appoitmentDate")?.getError("required")) {
+                                            <span class="error">Appointment Date: is required</span>
+                                        }
+                                         @else   {
+                                            <span class="error">Date of appointment: 2015 or later</span>
+                                        }
+                                      }
+                            
+          </div>
+          <div class="col-md-6 g-5 mx-auto inputs">
+                            <label for="contractEndsOn" class="light-color fs-5 pb-2">Contract Ends On:</label>
+                            <input type="date" name="contractEndsOn" formControlName="contractEndsOn">
+                             @if (managerForm.get('contractEndsOn')?.errors && managerForm.get('contractEndsOn')?.touched) 
+                    {
+                        @if (managerForm.get("contractEndsOn")?.getError("required")) {
+                                            <span class="error">Contract Ends On is required</span>
+                                        }
+                                         @else   {
+                                            <span class="error">Contract Ends On expires in 2025 or later</span>
+                                        }
+                                      }
+                            
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <textarea placeholder="Type Your story with club" name="storyWithClub" formControlName="storyWithClub"></textarea>
+               @if (managerForm.get('storyWithClub')?.errors && managerForm.get('storyWithClub')?.touched) 
+                    {
+                        @if (managerForm.get("storyWithClub")?.getError("required")) {
+                                            <span class="error">Story With Club is required</span>
+                                        }
+                                         @else if (managerForm.get("storyWithClub")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (managerForm.get("storyWithClub")?.getError("minlength")) {
+                                            <span class="error">Story With Club must be 5 chr. at least !</span>
+                                        }
+                                        @else  if (managerForm.get("storyWithClub")?.getError("maxlength")) {
+                                            <span class="error">Story With Club can't be more than 5000 chr</span>
+                                        }
+                        
+                    }
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <textarea placeholder="Type Your story"name="storyAbout" formControlName="storyAbout"></textarea>
+               @if (managerForm.get('storyAbout')?.errors && managerForm.get('storyAbout')?.touched) 
+                    {
+                        @if (managerForm.get("storyAbout")?.getError("required")) {
+                                            <span class="error">Story About is required</span>
+                                        }
+                                         @else if (managerForm.get("storyAbout")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                         @else if (managerForm.get("storyAbout")?.getError("minlength")) {
+                                            <span class="error">Story About must be 5 chr. at least !</span>
+                                        }
+                                        @else  if (managerForm.get("storyAbout")?.getError("maxlength")) {
+                                            <span class="error">Story About can't be more than 5000 chr</span>
+                                        }
+                        
+                    }
+          </div>
+
+    
+</div>
+      <button class="btn-submit fs-5 w-25 mb-3" [disabled]="managerForm.invalid || loading">
+        @if (loading) {
+            Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+            } @else {
+            Subscribe
+             }
+      </button>
+      </form>
+}
+      </div>
+      </div>
+  </section>
+  
+  <app-footer></app-footer>

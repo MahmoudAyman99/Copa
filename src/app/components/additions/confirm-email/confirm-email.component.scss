@@ -1,0 +1,23 @@
+input{
+    width: 10%;
+    border: 1px gray solid;
+    padding: 20px; 
+
+}
+a:hover{
+    color: var(--main-color);
+    transition-duration: .3s;
+}
+.animated-input {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

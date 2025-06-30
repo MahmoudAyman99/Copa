@@ -1,0 +1,45 @@
+.inputs input[type="text"] ,.inputs input[type="date"] ,.inputs input[type="password"] , textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: black;
+  border: 3px solid rgba(0, 255, 136, 0.384);
+  color: gray;
+  border-radius: 5px;
+}
+
+
+
+.upload-box ,.position-box  {
+  background: black;
+  border:  3px solid rgba(0, 255, 136, 0.384);
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.upload-box label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.upload-box input[type="file"] {
+  background : var(--light-color);
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.inputs input[type="date"] {
+  border: 3px solid var(--main-color);
+}
+
+textarea.ng-touched.ng-invalid {
+  border: 3px solid rgb(255, 20, 20);
+  outline: none;
+}
+input.ng-touched.ng-invalid {
+  border: 3px solid rgb(255, 20, 20);
+  outline: none;
+}

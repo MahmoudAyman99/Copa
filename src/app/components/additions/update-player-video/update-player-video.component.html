@@ -1,0 +1,24 @@
+<div class="profile reveal-left position-relative">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="goBack()"></i>
+            <h1 class="fs-1 light-color text-center fw-bold  py-5 header">Update Video </h1>
+            <div class="row p-5 g-4 g-md-3" >
+                <div class="col-md-6 mx-auto">
+                    <div class="inputs">
+                        <div class="upload-box">
+  <label for="photo-upload" class="custom-upload cursor-pointer">
+    <p class="fs-4 light-color">Add photo</p>
+  </label>
+  <input type="file" id="photo-upload" accept="video/*"  (change)="getFile($event)" class="cursor-pointer" >
+</div>
+                    </div>
+                </div>
+                <div class="col-md-7 mx-auto d-flex justify-content-center align-items-center">
+                    <button class="btn-profile fs-4 cursor-pointer" (click)="UpdatedVideo()" [disabled]="!video">
+                         @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                        Save }
+                     </button>
+                </div>
+            </div>
+        </div>

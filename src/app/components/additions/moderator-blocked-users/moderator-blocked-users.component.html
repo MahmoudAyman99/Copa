@@ -1,0 +1,38 @@
+<div class="px-4">
+  <h1 class="light-color text-center py-2">Blocked Users</h1>
+
+  <div class="table-responsive">
+    <table class="table table-striped w-100 text-center align-middle">
+      <thead>
+        <tr class="head fs-3">
+          <th>Full Name</th>
+          <th>User Name</th>
+          <th>Phone</th>
+          <th>Date Of Birth</th>
+          <th>Create Account On</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          @for (user of allUsers; track $index) {
+            <tr class="light-color fs-4">
+          <td>{{user.fullname}}</td>
+          <td>{{user.username}}</td>
+          <td>
+            @if (user.phone == null) {Not Set}
+            @else {{{user.phone}}}
+          </td>
+          <td>{{user.dateOfBirth}}</td>
+          <td>{{user.createOn}}</td>
+          <td>{{user.status}}</td>
+          <td ><i class="fa-solid fa-rotate-left cursor-pointer " (click)="return(user.id)" title="To active"></i>
+  </td>
+
+
+        </tr>
+          }
+      </tbody>
+    </table>
+  </div>
+</div>

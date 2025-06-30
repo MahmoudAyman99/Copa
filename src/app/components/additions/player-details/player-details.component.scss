@@ -1,0 +1,40 @@
+.player-details{
+    background: linear-gradient(to bottom, black,  #061a06 , #013601 , #068306);
+}
+.player-images .carousel-item img {
+    height: 400px;
+    object-fit: cover; 
+    width: 100%;
+}
+.carousel-control-prev , .carousel-control-next{
+    color: var(--main-color);
+}
+
+.carousel-indicators .active 
+{
+    background-color: var(--main-color);
+}
+
+.modal-header .modal-title{
+    color: var(--main-color);
+}
+p a{
+    color: var(--main-color);
+}
+p a:hover{
+    transition-duration: .5s;
+    color: rgb(8, 184, 8);
+}
+
+
+
+
+@media (max-width: 992px) {
+    .player-images .carousel-item img {
+        height: 500px;
+    }
+    .player-card{
+        width: 80%;
+        margin: auto;
+    }
+  }

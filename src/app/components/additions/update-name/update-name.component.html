@@ -1,0 +1,65 @@
+<div class="profile reveal-left position-relative">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="goBack()"></i>
+            <h1 class="fs-1 light-color text-center fw-bold  py-5 header">Update Name </h1>
+            <form class="row p-5 g-4 g-md-3" [formGroup]="UpdateName" (ngSubmit)="updateUserName()">
+                @if (errorMsg) 
+                    {
+                        <div class="col-md-7 mx-auto text-center" >
+                        <span class="mt-2 error fs-5">{{errorMsg}}</span>
+                        </div>
+                    }
+                <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                    <input type="text" [value]="firstName" placeholder="First Name" formControlName="firstName"  [ngClass]="{'error': UpdateName.get('firstName')?.errors && UpdateName.get('firstName')?.touched}">
+                    @if (UpdateName.get('firstName')?.errors && UpdateName.get('firstName')?.touched) 
+                    {
+                        @if (UpdateName.get("firstName")?.getError("required")) {
+                                            <span class="error">First Name is required</span>
+                                        }
+                                         @else if (UpdateName.get("firstName")?.getError("minlength")) {
+                                            <span class="error">minLength  : 3</span>
+                                        }
+                                         @else if (UpdateName.get("firstName")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :64 </span>
+                                        }
+                        
+                    }
+                    </div>
+                </div>
+                <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                       <input type="text" [value]="lastName" placeholder="Last Name" formControlName="lastName" [ngClass]="{'error': UpdateName.get('lastName')?.errors && UpdateName.get('lastName')?.touched}">
+                        @if (UpdateName.get('lastName')?.errors && UpdateName.get('lastName')?.touched) 
+                    {
+                        @if (UpdateName.get("lastName")?.getError("required")) {
+                                            <span class="error">Last Name is required</span>
+                                        }
+                                         @else if (UpdateName.get("lastName")?.getError("minlength")) {
+                                            <span class="error">minLength  : 3</span>
+                                        }
+                                         @else if (UpdateName.get("lastName")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :128 </span>
+                                        }
+                        
+                    }
+
+                    </div>
+                </div>
+                <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center">
+                    <button class="btn-profile fs-4 cursor-pointer" [disabled]="UpdateName.invalid">
+                        @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                        Save }
+                    </button>
+                </div>
+            </form>
+        </div>

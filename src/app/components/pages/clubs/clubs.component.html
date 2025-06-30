@@ -1,0 +1,30 @@
+
+<div class="all clubs-section position-relative">
+    <i class="fa-solid fa-circle-left back fs-1" (click)="goBack()"></i>
+    
+    <div class="container">
+        <div class="pb-5">
+            <h2 class="address py-3 fs-1 reveal">Clubs</h2>
+            <div class="row py-5 gy-4 gx-4"> 
+                @for (club of allClubs; track $index) {
+                <div class="col-md-4 col-lg-3 reveal-left">
+                    <div class="d-flex flex-column justify-content-center overflow-hidden club-card mx-auto"  (click)="goToDetails(club.id)" >
+                        <div class="staduim w-100">
+                            <img [src]="club.clubPictureUrl" [alt]="club.clubName" class="w-100 h-100">
+                        </div>
+                        <div class="p-3 text-center light-color">
+                            <h3>{{club.clubName}}</h3>
+                            <p>{{club.about.split(" ",15).join(" ")}}</p>
+                        </div>
+                        <div class="logo mb-5 mx-auto">
+                            <img [src]="club.logoUrl" [alt]="club.clubName" class="w-100 h-100 ">
+                        </div>
+                    </div>
+                </div>  
+            }
+             </div>
+        </div>
+        
+    </div>
+    <app-footer></app-footer>
+</div>

@@ -1,0 +1,204 @@
+<owl-carousel-o [options]="headerOwlOption">
+    <ng-template carouselSlide><section class="header1 d-flex align-items-center justify-content-center">
+    </section></ng-template>  
+    <ng-template carouselSlide><section class="header2 d-flex align-items-center justify-content-center">
+    
+    </section></ng-template>  
+  </owl-carousel-o>
+
+
+
+<app-navbar></app-navbar>
+<div class="all">
+
+    <section class="about py-5">
+
+       <div class="container">
+         <div class="row gy-3 w-100 mx-auto">
+            <div class="col-md-4 p-3 d-flex justify-content-center ">
+                <div class="w-100 rounded-4 image-wrapper reveal ">
+                        <img src="assets/images/about player.jpeg" alt="player" class="w-100" >
+                </div>
+            </div>
+            <div class="col-md-8 d-flex align-items-center">
+                    <div class="px-4 text-center">
+                        <h1 class="reveal">COPA is your ultimate platform</h1>
+                        <p class="light-color mt-4 reveal"> COPA is the leading football talent discovery platform in the Middle East, dedicated to 
+                            connecting football enthusiasts and aspiring professionals with clubs and opportunities 
+                            worldwide. Founded in 2019, Copa has already reached nearly 2 million players. At COPA, we 
+                            believe that passion for football transcends age and experience, COPA is your one-stop platform 
+                            through our partnerships with local and international federations and clubs we host tryouts, 
+                            offer guidance, and support your journey to football professionalism. Join football games 
+                            anytime, anywhere, and with anyone, and take your first step toward to success with COPA!</p>
+                    </div>
+            </div>
+        </div>
+       </div>
+
+    </section>
+    <section class="players">
+        <div class="text-center light-color py-4">
+            <h1>Club Players</h1>
+        </div>
+        <div class="container">
+            <div class="position-relative  py-4 ">
+                
+  <button class="carousel-btn prev-btn" (click)="clubPlayers1?.prev()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <button class="carousel-btn next-btn" (click)="clubPlayers1?.next()">
+    <i class="fa-solid fa-arrow-right"></i>
+  </button>
+                
+                     <owl-carousel-o  [options]="clubPlayersOwlOption" class="position-relative" #clubPlayers1 >
+                            @for (player of clubPlayers ; track $index) {
+                                 <ng-container >
+                                        <ng-template carouselSlide >
+                                           <div class="player-card reveal-left">
+            <img [src]="player.profilePictureUrl" [alt]="player.fullname" class="player-img bg-black">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div class="d-flex flex-column text-start">
+                <h5 class="fs-4 fw-bold ">{{player.fullname}}</h5>
+                <span class="fs-5">Age: {{player.age}}</span>
+                <span class="fs-5">{{player.position}}</span>
+              </div>
+              <div class="icons d-flex flex-column">
+                <i class="fas fa-eye fs-3" (click)="goToPlayerDetails(player.id)"></i>
+                <span>Views: 
+                  <br>{{player.views}}</span>
+              </div>
+            </div>
+          </div>
+                                        </ng-template>
+    </ng-container>
+                            }
+   
+  </owl-carousel-o>
+               
+            </div>
+        </div>
+    </section>
+    <section class="young-players d-flex align-items-center position-relative">
+        <div class="position-absolute top-0 bottom-0 w-100 bg-black opacity-50"></div>
+        <div class="row w-100 mx-auto ">
+          <div class="col-md-8 text-center mx-auto">
+            <p class=" reveal z-3 light-color fs-4">Copa hopes that we have a lot of Mo Salah and Omar Marmoush, so we must help the young players who are starting their way in football, so we have helped them through this site to upload their videos and their CVs to share with clubs and player scouts.</p>
+          </div>
+        </div>
+    </section>
+    <section class="players">
+        <div class="text-center light-color py-4">
+            <h1>Free Players</h1>
+        </div>
+        <div class="container">
+            <div class="position-relative  py-4 ">
+                
+  <button class="carousel-btn prev-btn" (click)="freePlayers1?.prev()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <button class="carousel-btn next-btn" (click)="freePlayers1?.next()">
+    <i class="fa-solid fa-arrow-right"></i>
+  </button>
+                
+                     <owl-carousel-o  [options]="clubPlayersOwlOption" class="position-relative" #freePlayers1 >
+                            @for (player of freePlayers; track $index) {
+                                 <ng-container >
+                                        <ng-template carouselSlide >
+                                           <div class="player-card reveal-right">
+            <img [src]="player.profilePictureUrl" [alt]="player.fullname" class="player-img bg-black">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div class="d-flex flex-column text-start">
+                <h5 class="fs-4 fw-bold ">{{player.fullname}}</h5>
+                <span class="fs-5">Age: {{player.age}}</span>
+                <span class="fs-5">{{player.position}}</span>
+              </div>
+              <div class="icons d-flex flex-column ">
+                <i class="fas fa-eye fs-3" (click)="goToPlayerDetails(player.id)"></i>
+                <span>Views: 
+                  <br>{{player.views}}</span>
+              </div>
+            </div>
+          </div>
+                                        </ng-template>
+    </ng-container>
+                            }
+   
+  </owl-carousel-o>
+               
+            </div>
+        </div>
+    </section>
+    <section class="achive">
+        <div class="py-5 text-center container mx-auto">
+            <h1 class="py-5 reveal "> Achieve your dream and become <br>
+                professional football player</h1>
+                <p class="py-5 mx-auto light-color reveal fs-4"> If you've always dreamed of becoming a professional football player and joining a top br
+                    club, your dream is now closer than ever, thanks to websites dedicated to helping 
+                    amateur players. These platforms offer specialized services to help you to find football 
+                    club and take your game to the next level.</p>
+
+        </div>
+        <div class="pt-5 ">
+                <div class="container pt-5">
+                    <div class="row pt-5 g-2 d-flex align-items-center">
+                        <div class="col-md-3 col-6 reveal">
+                            <img src="assets/images/ronaldo.png" alt="ronaldo" class="w-100">
+                        </div>
+                        <div class="col-md-3 col-6 reveal">
+                            <img src="assets/images/mosalah.png" alt="mosalah" class="w-100">
+                        </div>
+                        <div class="col-md-3 col-6 reveal">
+                            <img src="assets/images/messi.png" alt="messi" class="w-100">
+                        </div>
+                        <div class="col-md-3 col-6 align-self-end reveal">
+                            <img src="assets/images/omar-marmoush.png" alt="omar-marmoush" class="w-100">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+    </section>
+
+    <section class="clubs">
+        <div class="text-center light-color py-2">
+            <h1>Clubs</h1>
+        </div>
+        <div class="container">
+            <div class="position-relative  py-4 ">
+                
+  <button class="carousel-btn prev-btn" (click)="clubCarousel?.prev()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <button class="carousel-btn next-btn" (click)="clubCarousel?.next()">
+    <i class="fa-solid fa-arrow-right"></i>
+  </button>
+                
+                     <owl-carousel-o  [options]="clupsOwlOption" class="position-relative" #clubCarousel >
+                            @for (club of allClubs; track $index) {
+                                 <ng-container >
+                                        <ng-template carouselSlide >
+                                            <div class="d-flex flex-column justify-content-center overflow-hidden club-card mx-auto reveal-left" (click)="goToDetails(club.id)" >
+                        <div class="staduim w-100">
+                            <img [src]="club.clubPictureUrl" [alt]="club.clubName" class="w-100 h-100">
+                        </div>
+                        <div class="p-3 text-center light-color">
+                            <h3>{{club.clubName}}</h3>
+                            <p>{{club.about.split(" ",15).join(" ")}}</p>
+                        </div>
+                        <div class="logo mb-5 mx-auto">
+                            <img [src]="club.logoUrl" [alt]="club.clubName" class="w-100 h-100 ">
+                        </div>
+                    </div>
+                                        </ng-template>
+    </ng-container>
+                            }
+   
+  </owl-carousel-o>
+               
+            </div>
+        </div>
+    </section>
+    <section>
+        <app-footer></app-footer>
+    </section>
+</div>
+

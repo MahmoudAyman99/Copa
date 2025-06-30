@@ -1,0 +1,97 @@
+<div class="player-details py-4 position-relative">
+    <i class="fa-solid fa-circle-left back fs-1" (click)="goBack()"></i>
+    <div class="container">
+      <div class="w-100 ps-md-5">
+                        <h2 class="text-center light-color fw-bold  fs-1">Player Details</h2>
+                    </div>
+        <div class="row gy-4 gx-2 8y-4">
+            <div class="col-md-4 p-3">
+                <div class="player-images">
+                     <img [src]="player?.profilePictureUrl" class="w-100 rounded-4 cursor-pointer bg-black"  [alt]="player?.fullname"   data-bs-toggle="modal" data-bs-target="#imageModel"(click)="openImageModal(player.profilePictureUrl)">
+                </div>
+
+            </div>
+            <div class="col-md-8 ps-md-5">
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    
+                    <div class="pt-5 ps-md-5 light-color ">
+                        <div class="d-flex flex-column ps-md-5">
+                            <p>
+                                <span class="fs-1 ps-2">{{player?.fullname}}</span>
+                            </p>
+                            <p>
+                                <span class="fs-3">Age:</span>
+                                <span class="fs-4 ps-2">{{player?.age}}</span>
+                            </p>
+                            <p>
+                                <span class="fs-3">Address:</span>
+                                <span class="fs-4 ps-2">{{player?.address}}</span>
+                            </p>
+                            <p>
+                                <span class="fs-3">Email:</span>
+                                <span class="fs-4 ps-2">{{player?.email}}</span>
+                            </p>
+                            <p>
+                                <span class="fs-3">Phone:</span>
+                                <span class="fs-4 ps-2">{{player?.phone}}</span>
+                            </p>
+                            <p>
+                                <span class="fs-3">Position:</span>
+                                <span class="fs-4 ps-2">{{player?.position}}</span>
+                            </p>
+                            <p>
+                                <span class="fs-3">Story About:</span>
+                                <span class="fs-5 ps-2">{{player?.storyAbout}}</span>
+                            </p>
+                            @if (player?.club !== null) {
+                              <p>
+                                <span class="fs-3">club:</span>
+                                <span class="fs-4 ps-2">{{player?.club}}</span>
+                            </p>
+                              <p>
+                                <span class="fs-3">price:</span>
+                                <span class="fs-4 ps-2">{{player?.price}}</span>
+                            </p>
+                              <p>
+                                <span class="fs-3">contract Ends On:</span>
+                                <span class="fs-4 ps-2">{{player?.contractEndsOn}}</span>
+                            </p>
+                              <p>
+                                <span class="fs-3">Is Avaliable For Sale:</span>
+                                <span class="fs-4 ps-2">
+                                  @if (player?.isAvaliableForSale == true) {Yes}
+                                  @else {No}
+                                </span>
+                            </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 ">
+               @if (player.video === 'Video not uploaded ') {
+                        <h2 class="py-3 text-center light-color">{{ player?.fullname }}  has no video</h2>
+                    } @else {
+                        <h2 class="py-3 text-center light-color">{{ player?.fullname }} Video</h2>
+                <div>
+                    <iframe   allowfullscreen allow=" encrypted-media"[src]="player.safeVideoUrl"class="w-100"height="500px"></iframe>
+                </div>
+}
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+@if (imageUrl) {
+  <app-image-model [imageUrl]="imageUrl"></app-image-model>
+}
+  
+
+

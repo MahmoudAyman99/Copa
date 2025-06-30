@@ -1,0 +1,237 @@
+<h1 class="text-center light-color">Add New Player</h1>
+
+<form class="form" [formGroup]="createPlayerForm" (ngSubmit)="submitForm()">
+  <div class="row p-3 g-4 g-md-3">
+    <div class="col-md-6">
+      <div class="row g-4 g-md-4 mt-md-4">
+        
+    <div class="col-md-10 mx-auto ">
+      <input type="text" formControlName="Firstname" placeholder="First Name" />
+      @if (createPlayerForm.get("Firstname")?.errors && createPlayerForm.get("Firstname")?.touched) {
+            @if (createPlayerForm.get("Firstname")?.getError("required")) {
+                                            <span class="error">First name is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("Firstname")?.getError("minlength")) {
+                                            <span class="error">minLength  : 3</span>
+                                        }
+                                         @else if (createPlayerForm.get("Firstname")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :64 </span>
+                                        }
+          }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <input type="text" formControlName="Lastname" placeholder="Last Name" />
+       @if (createPlayerForm.get("Lastname")?.errors && createPlayerForm.get("Lastname")?.touched) {
+            @if (createPlayerForm.get("Lastname")?.getError("required")) {
+                                            <span class="error">Last name is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("Lastname")?.getError("minlength")) {
+                                            <span class="error">minLength  : 3</span>
+                                        }
+                                         @else if (createPlayerForm.get("Lastname")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :128 </span>
+                                        }
+          }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <input type="text" formControlName="Nickname" placeholder="Nick Name" />
+       @if (createPlayerForm.get("Nickname")?.errors && createPlayerForm.get("Nickname")?.touched) {
+            @if (createPlayerForm.get("Nickname")?.getError("required")) {
+                                            <span class="error">Nick name is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("Nickname")?.getError("minlength")) {
+                                            <span class="error">minLength  : 6</span>
+                                        }
+                                         @else if (createPlayerForm.get("Nickname")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :256 </span>
+                                        }
+          }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <input type="email" formControlName="Email" placeholder="Email" />
+      @if (createPlayerForm.get("Email")?.errors && createPlayerForm.get("Email")?.touched) {
+            @if (createPlayerForm.get("Email")?.getError("required")) {
+                                            <span class="error">Email is required</span>
+                                        }
+                                         @else if (createPlayerForm.get("Email")?.getError("email")) {
+                                            <span class="error">Must be valid email</span>
+                                        }
+          }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <input type="text" formControlName="Phone" placeholder="Phone" />
+       @if (createPlayerForm.get('Phone')?.errors && createPlayerForm.get('Phone')?.touched) 
+                    {
+                        @if (createPlayerForm.get("Phone")?.getError("required")) {
+                                            <span class="error">Phone Number is required</span>
+                                        }
+                                        @else if (createPlayerForm.get("Phone")?.getError("pattern")) {
+                                            <span class="error">Your Phone Number is must be 11 numbers and start with (010/011/015/012)</span>
+                                        }
+                        
+                    }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <input
+        type="number"
+        formControlName="Number"
+        placeholder="Number"
+        min="1"
+        max="99"
+        oninput="this.value = Math.max(1, Math.min(99, this.value))"
+      />
+       @if (createPlayerForm.get('Number')?.errors && createPlayerForm.get('Number')?.touched) 
+                    {
+                        @if (createPlayerForm.get("Number")?.getError("required")) {
+                                            <span class="error">Number  is required</span>
+                                        }
+                                        @else if (createPlayerForm.get("Number")?.getError("pattern")) {
+                                            <span class="error">Number must be => 1 and =< 99 </span>
+                                        }
+                        
+                    }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <div class="position-box d-flex justify-content-between bg-white p-2 rounded-3">
+        <label for="position" class="fs-5">Position</label>
+        <select
+          id="position"
+          formControlName="PositionId"
+          class="rounded-3 px-2 cursor-pointer fw-bolder bg-black light-color"
+        >
+          <option value="" selected disabled hidden class="light-color">choose player Position</option>
+          @for (position of positions; track $index) {
+            <option [value]="position.value">{{ position.text }}</option>
+          }
+        </select>
+         @if (createPlayerForm.get('PositionId')?.errors && createPlayerForm.get('PositionId')?.touched) 
+                    {
+                        @if (createPlayerForm.get("PositionId")?.getError("required")) {
+                                            <span class="error">Position Id  is required</span>
+                                        }}
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row g-4 g-md-3">
+        <div class="col-md-10 mx-auto">
+      <label for="birthDate" class="light-color fs-5 pb-2">Birth Date:</label>
+      <input type="date" formControlName="birthDate" />
+       @if (createPlayerForm.get('birthDate')?.errors && createPlayerForm.get('birthDate')?.touched) 
+                    {
+                        @if (createPlayerForm.get("birthDate")?.getError("required")) {
+                                            <span class="error">Birth Date  is required</span>
+                                        }
+                                        @else {
+                                            <span class="error">Player age must be between 45 and 5</span>
+                                        }
+                        
+                    }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <label for="JoinedClubOn" class="light-color fs-5 pb-2">Joined Club On</label>
+      <input type="date" formControlName="JoinedClubOn" />
+       @if (createPlayerForm.get('JoinedClubOn')?.errors && createPlayerForm.get('JoinedClubOn')?.touched) 
+                    {
+                        @if (createPlayerForm.get("JoinedClubOn")?.getError("required")) {
+                                            <span class="error">Joined Club On is required</span>
+                                        }
+                                        @else {
+                                            <span class="error">Joined Club On must be between 2008 and 2025</span>
+                                        }
+                        
+                    }
+    </div>
+    
+    <div class="col-md-10 mx-auto">
+      <label for="ContractDuration" class="light-color fs-5 pb-2">Contract Duration End:</label>
+      <input type="date" formControlName="ContractDuration" />
+      @if (createPlayerForm.get('ContractDuration')?.errors && createPlayerForm.get('ContractDuration')?.touched) 
+                    {
+                        @if (createPlayerForm.get("ContractDuration")?.getError("required")) {
+                                            <span class="error">Contract Duration End is required</span>
+                                        }
+                                        @else {
+                                            <span class="error">Contract Duration End must be more than  or eqaul (Joined Club On ) year</span>
+                                        }
+                        
+                    }
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <label class="custom-upload cursor-pointer light-color">Contract Picture</label>
+      <input
+        type="file"
+        accept="image/*"
+        class="bg-white text-black"
+        (change)="onFileChange($event, 'ContractPicture')"
+      />
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <label class="custom-upload cursor-pointer light-color">Player Picture</label>
+      <input
+        type="file"
+        accept="image/*"
+        class="bg-white text-black"
+        (change)="onFileChange($event, 'ProfilePictureUrl')"
+      />
+    </div>
+
+    <div class="col-md-10 mx-auto">
+      <label class="custom-upload cursor-pointer light-color">Player Video</label>
+      <input
+        type="file"
+        accept="video/*"
+        class="bg-white text-black"
+        (change)="onFileChange($event, 'Video')"
+      />
+    </div>
+      </div>
+    </div>
+
+    
+
+    <div class="col-md-7 mx-auto">
+      <div class="d-flex justify-content-center">
+        <button
+          class="btn-submit w-25"
+          type="submit"
+          [disabled]="
+            createPlayerForm.invalid ||
+            loading ||
+            !ContractPicture 
+          "
+        >
+          @if (loading) {
+            Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+          } @else {
+            Add
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+

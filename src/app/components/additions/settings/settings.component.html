@@ -1,0 +1,238 @@
+<div class="dashboard ">
+  <div class="nav">
+      @if ( Mode === 'view') {
+        <!-- Buttons to update club and add admin or player -->
+          <a class="fs-4 light-color fw-bolder h-100 ms-auto nav-content d-flex justify-content-center align-items-center cursor-pointer px-4 " (click)="setUpdateMode()" *ngIf="isManager && managerSection === 'club'  && !isManagerNotAddClub">Update Club</a>
+      <a class="fs-4 light-color fw-bolder  h-100 ms-auto nav-content d-flex justify-content-center align-items-center cursor-pointer px-4" (click)="setAddMode()" *ngIf="(isManager || isAdmin ) && managerSection === 'players'  && !isManagerNotAddClub" >Add New Player </a>
+      <a class="fs-4 light-color fw-bolder h-100 ms-auto nav-content d-flex justify-content-center align-items-center cursor-pointer px-4 " (click)="setAddMode()" *ngIf="isManager && managerSection === 'admins'  && !isManagerNotAddClub">Add New Admin</a>
+      }
+      @if (( isAdmin || isManager) && (Mode === 'update' || Mode === 'add')  ) {
+          <a class="fs-4 light-color fw-bolder h-100 ms-auto nav-content d-flex justify-content-center align-items-center cursor-pointer px-4 " (click)="setViewMode()"><i class="fa-solid fa-circle-left me-2"></i> Back</a>
+      }
+  </div>
+  <div class="row g-0"> 
+  <div class="col-md-2">
+   <div class="side-bar position-fixed d-flex " [ngClass]="{ 'open': isopen }">
+
+    <div class="side-bar-content overflow-hidden">
+        <div class="d-flex flex-column  p-4 min-vh-100 light-color">
+        <div class="name ">
+        <span class="fs-2">Copa</span>
+        </div>
+  
+      <div class="links d-flex flex-column mt-5 gap-3 text-center">
+        <a routerLink ="/home"><i class="fa-solid fa-house me-2"></i>Go Home</a>
+          
+
+        <!-- IS Moderator -->
+        
+        
+        <a  [ngClass]="{ 'selected' : moderatorSection === 'dashboard' }" *ngIf="isModerator" (click)="setModeratorSection('dashboard')" ><i class="fa-solid fa-chart-pie me-2"></i>Dashboard</a>
+        <a  [ngClass]="{ 'selected' : moderatorSection === 'clubs' }" *ngIf="isModerator" (click)="setModeratorSection('clubs')" ><i class="fa-solid fa-circle-info me-2 "></i>Clubs</a>
+        <a [ngClass]="{ 'selected' : moderatorSection === 'freePlayers' }" *ngIf="isModerator" (click)="setModeratorSection('freePlayers')"><i class="fa-solid fa-person-running me-2"></i>Free Players</a>
+        <a [ngClass]="{ 'selected' : moderatorSection === 'admins' }" *ngIf="isModerator" (click)="setModeratorSection('admins')"><i class="fa-solid fa-user-tie me-2"></i>Admins</a>
+        <a [ngClass]="{ 'selected' : moderatorSection === 'users' }" *ngIf="isModerator" (click)="setModeratorSection('users')"><i class="fa-solid fa-users me-2"></i> All Users</a>
+        <a [ngClass]="{ 'selected' : moderatorSection === 'blockedUsers' }" *ngIf="isModerator" (click)="setModeratorSection('blockedUsers')"><i class="fa-solid fa-user-slash me-2"></i>Blocked <br>Users</a>
+
+        <!-- Is Maneger Or Admin -->
+
+        <a  *ngIf="isManagerNotAddClub" routerLink="/clubForm" >Add Your Club</a>
+        <a  [ngClass]="{ 'selected' : managerSection === 'club' }" *ngIf="(isManager || isAdmin) && !isManagerNotAddClub" (click)="setSection('club')" ><i class="fa-solid fa-circle-info me-2 "></i>Club Details</a>
+        <a [ngClass]="{ 'selected' : managerSection === 'players' }" *ngIf="(isManager || isAdmin) && !isManagerNotAddClub" (click)="setSection('players')"><i class="fa-solid fa-person-running me-2"></i>Players</a>
+        <a [ngClass]="{ 'selected' : managerSection === 'admins' }" *ngIf="isManager && !isManagerNotAddClub" (click)="setSection('admins')"><i class="fa-solid fa-user-tie me-2"></i>Admins</a>
+        
+      </div>
+  
+      <div class="footer d-flex align-items-end justify-content-center flex-grow-1">
+        <a class="fw-bolder" (click)="signOut()"><i class="fa-solid fa-right-from-bracket me-2"></i> Log Out</a>
+      </div>
+        </div>
+    
+    </div>
+  
+    <!-- زرار الفتح والقفل ثابت -->
+    <div class="side-bar-header flex-column justify-content-center py-4 px-2 light-color bg-transparent text-center my-auto ">
+      <i
+        class="fa-solid cursor-pointer"
+        [ngClass]="{ 'fa-xmark fs-2': isopen, 'fa-align-justify fa-2x': !isopen }"
+        (click)="toggle()">
+      </i>
+    </div>
+    
+  </div>
+  </div>
+
+  <div class="col-md-10">
+  
+      <div class="container ">
+    <div class="btns mx-auto d-flex justify-content-around">
+      @if ((isManager || isAdmin) && managerSection === 'players' && Mode === 'view' && !isManagerNotAddClub) {
+          <button class="btn" [ngClass]="{ 'btn-selected' : currentPlayersTab === 'active'  }" (click)="setPlayersTab('active'); setViewMode()">Active</button> 
+        <button class="btn " [ngClass]="{ 'btn-selected' : currentPlayersTab === 'deleted' }" (click)="setPlayersTab('deleted'); setViewMode()" >Deleted</button>
+      }
+      @if (isManager && managerSection === 'admins' && Mode === 'view'  && !isManagerNotAddClub) {
+          <button class="btn" [ngClass]="{ 'btn-selected' : currentAdminsTab === 'active' }" (click)="setAdminsTab('active') ; setViewMode()">Active</button> 
+        <button class="btn " [ngClass]="{ 'btn-selected' : currentAdminsTab === 'deleted' }" (click)="setAdminsTab('deleted') ; setViewMode()" >Deleted</button>
+      }
+        
+    </div>
+        <div class="position-relative overflow-hidden rounded-4 div">
+  <div class="position-relative py-5" style="background-color: rgba(0, 0, 0, 0.13);">
+
+    <h1  class="light-color text-center" *ngIf="isManagerNotAddClub"  >You don't add Your Club , please add it first</h1>
+
+
+        <app-man-club-details *ngIf=" (isManager || isAdmin) && Mode === 'view' && managerSection === 'club' && !isManagerNotAddClub "></app-man-club-details>
+      
+           <!-- Update Club -->
+        <form class="row gy-3" *ngIf=" (isManager || isAdmin) && Mode === 'update' && managerSection === 'club'  && !isManagerNotAddClub" [formGroup]="updateClub" (ngSubmit)="updateClubDetails()">
+        <div class="col-md-6 mx-auto">
+          <h1 class="text-center light-color">Update Club</h1>
+        </div>
+        <div class="col-md-7 mx-auto">
+          <div  class="text-danger ">
+          {{erorrMsg}}
+
+          
+        </div>
+        </div>
+        <div class="col-md-7 mx-auto">
+          <input type="text" placeholder="Enter Club Name" formControlName="clubName">
+          @if (updateClub.get("clubName")?.errors && updateClub.get("clubName")?.touched) {
+            @if (updateClub.get("clubName")?.getError("required")) {
+                                            <span class="error">Club Name is required</span>
+                                        }
+                                         @else if (updateClub.get("clubName")?.getError("minlength")) {
+                                            <span class="error">minLength  : 5</span>
+                                        }
+                                         @else if (updateClub.get("clubName")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :128 </span>
+                                        }
+          }
+          
+        </div>
+        <div class="col-md-7 mx-auto">
+          <input type="text" placeholder="Enter Story" formControlName="story">
+          @if (updateClub.get("story")?.errors && updateClub.get("story")?.touched) {
+            @if (updateClub.get("story")?.getError("required")) {
+                                            <span class="error">Story is required</span>
+                                        }
+                                         @else if (updateClub.get("story")?.getError("minlength")) {
+                                            <span class="error">minLength  : 5</span>
+                                        }
+                                         @else if (updateClub.get("story")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :5000 </span>
+                                        }
+          }
+          
+        </div>
+        <div class="col-md-7 mx-auto">
+          <input type="text" placeholder="Enter About" formControlName="about">
+          @if (updateClub.get("about")?.errors && updateClub.get("about")?.touched) {
+            @if (updateClub.get("about")?.getError("required")) {
+                                            <span class="error">About is required</span>
+                                        }
+                                         @else if (updateClub.get("about")?.getError("minlength")) {
+                                            <span class="error">minLength  : 5</span>
+                                        }
+                                         @else if (updateClub.get("about")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                        @else
+                                        {
+                                            <span class="error">maxLength  :1024 </span>
+                                        }
+          }
+          
+        </div>
+        <div class="col-md-6 mx-auto">
+          <div class="d-flex justify-content-center">
+          <button class="btn-submit w-25 " [disabled]="updateClub.invalid">
+            @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                                Update
+                             }
+          </button>
+          </div>
+        </div>
+      </form>
+      <app-create-player *ngIf="(isManager || isAdmin) && Mode === 'add' && managerSection === 'players'  && !isManagerNotAddClub" (modeChange)="Mode = 'view' "></app-create-player>
+
+      <!-- add Admin -->
+      <form class="row gy-3" *ngIf="isManager && Mode === 'add' && managerSection === 'admins'  && !isManagerNotAddClub" [formGroup]="addAdmin" (ngSubmit)="AddAdmin()">
+        <div class="col-md-6 mx-auto">
+          <h1 class="text-center light-color">Add New Admin</h1>
+        </div>
+        <div class="col-md-7 mx-auto">
+          <div  class="text-danger ">
+          {{erorrMsg}}
+
+          
+        </div>
+        </div>
+        <div class="col-md-7 mx-auto">
+          <input type="email" placeholder="Enter Email" formControlName="adminEmail">
+          @if (addAdmin.get("adminEmail")?.errors && addAdmin.get("adminEmail")?.touched) {
+            <div *ngIf="addAdmin.get('adminEmail')?.getError('required')" class="text-danger">
+        email is required.
+      </div>
+          <div *ngIf="addAdmin.get('adminEmail')?.getError('email')" class="text-danger">
+        email is invalid enter valid email.
+      </div>
+          }
+          
+        </div>
+        <div class="col-md-6 mx-auto">
+          <div class="d-flex justify-content-center">
+          <button class="btn-submit w-25 " [disabled]="addAdmin.invalid">
+            @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                                Add
+                             }
+          </button>
+          </div>
+        </div>
+      </form>
+
+      @if ((isManager || isAdmin) && managerSection === 'players' && Mode === 'view'  && !isManagerNotAddClub) 
+      {
+  <app-active-player *ngIf="currentPlayersTab === 'active'"></app-active-player>
+  <app-deleted-player *ngIf="currentPlayersTab === 'deleted'"></app-deleted-player>
+      }
+      @if ( isManager && managerSection === 'admins' && Mode === 'view'  && !isManagerNotAddClub) 
+      {
+  <app-active-admins *ngIf="currentAdminsTab === 'active'"></app-active-admins>
+  <app-deleted-admins *ngIf="currentAdminsTab === 'deleted'"></app-deleted-admins>
+
+      }
+
+
+      @if (isModerator && Mode === 'view') {
+        <app-moderator-dashboard *ngIf=" moderatorSection === 'dashboard'" ></app-moderator-dashboard>
+        <app-moderator-clubs *ngIf=" moderatorSection === 'clubs'" ></app-moderator-clubs>
+        <app-moderator-users *ngIf=" moderatorSection === 'users'" ></app-moderator-users>
+        <app-moderator-admins *ngIf=" moderatorSection === 'admins'" ></app-moderator-admins>
+        <app-moderator-free-players *ngIf=" moderatorSection === 'freePlayers'" ></app-moderator-free-players>
+        <app-moderator-blocked-users *ngIf=" moderatorSection === 'blockedUsers'" ></app-moderator-blocked-users>
+      }
+
+   
+  </div>
+</div>
+
+    </div>
+    
+  </div>
+</div>
+
+</div>

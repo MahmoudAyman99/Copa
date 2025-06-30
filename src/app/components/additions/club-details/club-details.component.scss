@@ -1,0 +1,54 @@
+.club-details{
+    background: linear-gradient(to left, black,  #061a06 , #013601 , #068306);
+}
+.stadium{
+    height: 500px;
+    overflow: hidden;
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+}
+.stadium img {
+    object-fit: cover;
+}
+.logo{
+    width: 150px;
+    height: 150px;
+    position: absolute; 
+    top: 0;
+    left: 2%;
+    transform: translateY(-50%);
+}
+.main-shirt{
+    height: 450px;
+}
+.club-players{
+    background-image: url('../../../../assets/images/dark.jpeg');
+    background-size: cover;
+    background-position: center center;
+}
+.player-card{
+    width: 100%;
+}
+ .carousel-control-prev , .carousel-control-next{
+    color: var(--main-color);
+}
+
+.carousel-indicators .active 
+{
+    background-color: var(--main-color);
+}
+
+
+@media (max-width: 992px) {
+    .logo{
+        width: 100px;
+        height: 100px;
+    }
+    .stadium{
+        border-bottom-left-radius: 40% 10%;
+        border-bottom-right-radius: 40% 10%;
+    }
+    .main-shirt{
+    height: 450px;
+}
+  }

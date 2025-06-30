@@ -1,0 +1,108 @@
+@if (Mode === 'none') {
+<div class="px-4">
+  <h1 class="light-color text-center py-2">Deleted Players</h1>
+
+  <div class="table-responsive">
+    <table class="table w-100 text-center align-middle">
+      <thead>
+        <tr class="head fs-3">
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Phone</th>
+          <th>Number</th>
+          <th>Position</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (player of deletedPlayers ; track $index) {
+          <tr class="light-color fs-5">
+          <td>{{player.fullname}}</td>
+          <td>{{player.age}}</td>
+          <td>{{player.phone}}</td>
+          <td>{{player.number}}</td>
+          <td>{{player.position}}</td>
+             <td class="position-relative" #menu>
+  <div class="icon-menu-wrapper" #menuWrapper>
+    <i
+   
+      class="fa-solid  fs-4 fa-dice-three cursor-pointer menu-toggle-icon"
+      (click)="toggleActions(player.id)">
+    </i>
+
+    <div class="icon-actions" *ngIf="openIndex === player.id">
+      <i class="fa-solid fa-trash-can-arrow-up text-success cursor-pointer" (click)="restorePlayer(player.id)" title="Restore" ></i>
+      <i class="fa-solid fa-trash text-danger cursor-pointer" (click)="removePlayer(player.id)" *ngIf="isManager" title="To remove"></i>
+      <i class="fa-solid fa-eye cursor-pointer" (click)="setMode('view') ; getSelectPlayer(player.id)" title="View"></i>
+    </div>
+  </div>
+</td>
+
+
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
+}
+
+@if (Mode == 'view' && selectPlayer) {
+  <div class="position-relative dashboard">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="setMode('none')"></i>
+            <div class="row d-flex align-items-center">
+              <div class="col-md-4 p-4  ms-auto">
+                <div >
+                    <img [src]="selectPlayer?.profilePictureUrl" alt="Player Picture" class="w-100 rounded-circle picture bg-black">
+                </div>
+              </div>
+              <div class="col-md-5 ms-auto">
+                    <div class=" text-center text-md-start row light-color py-4">
+                        <div class="col-md-12 p-2">
+                    <span class="fs-1 mb-2 text-uppercase">{{selectPlayer.fullname}}</span>
+                    
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Age : <span class="fs-5">{{selectPlayer.age}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            <span class="fs-4 mb-2">Phone : <span class="fs-5">{{selectPlayer.phone}}</span></span>
+                    
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Email : <span class="fs-5">{{selectPlayer.email}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Position : <span class="fs-5">{{selectPlayer.position}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Number : <span class="fs-5">{{selectPlayer.number}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Joined Club On : <span class="fs-5">{{selectPlayer.joinedClubOn}}</span></span>
+                        </div>
+                        <div class="col-12">
+                            
+                    <span class="fs-4 mb-2 ">Status : <span class="fs-5">{{selectPlayer.status}}</span></span>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-10 mx-auto ">
+               @if (selectPlayer?.videoUrl === 'No uploaded videos found') {
+                        <h2 class="py-3 text-center light-color">{{ selectPlayer?.fullname }}  has no video</h2>
+                    } @else {
+                        <h2 class="py-3 text-center light-color">{{ selectPlayer?.fullname }} Video</h2>
+                <div>
+                    <iframe   allowfullscreen allow="  encrypted-media"[src]="selectPlayer?.safeVideoUrl"class="w-100"height="500px"></iframe>
+                </div>
+}
+
+            </div>
+            </div>
+  </div>
+}

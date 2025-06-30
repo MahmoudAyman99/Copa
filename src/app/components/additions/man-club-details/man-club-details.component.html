@@ -1,0 +1,68 @@
+@if (Mode === 'none') {
+    <div class="w-100 light-color">
+    <h1 class="text-center ">Club Details</h1>
+    <div class="row gy-3 py-4 px-2">
+        <div class="col-md-2 ms-auto">
+            <div class="d-flex flex-column justify-content-around">
+                
+            <div class="logo position-relative mx-auto rounded-circle bg-white d-flex align-items-center justify-content-center ">
+                <img [src]="clubDetails?.logoUrl" alt="Club Logo" class="w-100 rounded-circle ">
+                <i class="fa-solid fa-pen-to-square  cursor-pointer img-icon" (click)="setMode('updateLogo')" *ngIf="isManager" ></i>
+            </div>
+            
+                    <span class="fs-2 py-4 text-center light-color ">{{clubDetails?.clubName}}</span>
+            </div>
+            </div>
+            <div class="col-md-8 ms-md-auto">
+                <div class="text-left d-flex flex-column light-color">
+                    <span class="fs-4 mb-2">Number of players: <span>{{clubDetails?.playersCount}}</span></span>
+                    <span class="fs-4 mb-2">Number of Admins: <span>{{clubDetails?.adminsCount}}</span></span>
+                    <span class="fs-5 mb-2">{{clubDetails?.about}}</span>
+                </div>
+            </div>
+            <div class="col-md-8 p-5 ">
+                <div class="position-relative bg-black rounded-4">
+                    <img [src]="clubDetails?.clubPictureUrl" alt="Club Picture" class="w-100 " [ngClass]="{ 'img-edit': isManager, 'rounded-4': isAdmin }">
+                    <i class="fa-solid fa-pen-to-square  cursor-pointer light-color edit fs-3"  (click)="setMode('updatePicture')" *ngIf="isManager"></i>
+                </div>
+            </div>
+            <div class="col-md-3 col-9   mx-auto ms-md-auto my-auto p-3 position-relative" >
+                <div class="position-relative bg-black rounded-4">
+                    <img [src]="clubDetails?.mainShirtUrl" alt="Club Main Shirt" class="w-100"  [ngClass]="{ 'img-edit': isManager, 'rounded-4': isAdmin }"> 
+                    <i class="fa-solid fa-pen-to-square  cursor-pointer light-color edit fs-3"  (click)="setMode('updateShirt')" *ngIf="isManager"></i>
+                </div>
+            </div>
+        
+    </div>
+</div>
+}
+
+
+@if (Mode == 'updateLogo' || Mode === 'updatePicture' || Mode === 'updateShirt') {
+  <div class="position-relative dashboard">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="goBack()"></i>
+            <h1 class="fs-1 light-color text-center fw-bold  py-5 header">
+                @if (Mode ==='updateLogo') {Update Logo}
+                @if (Mode ==='updatePicture') {Update Picture}
+                @if (Mode ==='updateShirt') {Update Shirt}
+            </h1>
+            <div class="row p-5 g-4 g-md-3" >
+                <div class="col-md-6 mx-auto">
+                        <div class="upload-box ">
+  <label for="photo-upload" class="custom-upload cursor-pointer">
+    <p class="fs-4 light-color">Add photo</p>
+  </label>
+  <input type="file" id="photo-upload" accept="image/*"  (change)="getFile($event)" class="cursor-pointer bg-white text-black" >
+</div>
+                    </div>
+                </div>
+                <div class="col-md-7 mx-auto d-flex justify-content-center align-items-center">
+                    <button class="btn-submit w-25 mx-auto fs-4 cursor-pointer" (click)="Update(Mode)" [disabled]="!picture">
+                         @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                        Save }
+                     </button>
+                </div>
+            </div>
+}

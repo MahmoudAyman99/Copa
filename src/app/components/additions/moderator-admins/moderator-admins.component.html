@@ -1,0 +1,36 @@
+  <div class="px-4">
+  <h1 class="light-color text-center py-2">All Admins</h1>
+
+  <div class="table-responsive">
+    <table class="table table-striped w-100 text-center align-middle">
+      <thead>
+        <tr class="head fs-3">
+          <th>Full Name</th>
+          <th>User Name</th>
+          <th>Phone</th>
+          <th>Date Of Birth</th>
+          <th>Create Account On</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+          @for (admin of allAdmins; track $index) {
+            <tr class="light-color fs-4">
+          <td>{{admin.fullname}}</td>
+          <td>{{admin.username}}</td>
+          <td>
+            @if (admin.phone == null) {Not Set}
+            @else {{{admin.phone}}}
+          </td>
+          <td>{{admin.dateOfBirth}}</td>
+          <td>{{admin.createOn}}</td>
+          <td>{{admin.status}}</td>
+
+
+
+        </tr>
+          }
+      </tbody>
+    </table>
+  </div>
+</div>

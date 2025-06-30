@@ -1,0 +1,96 @@
+<div class="profile reveal-left position-relative">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="goBack()"></i>
+            <h1 class="fs-1 light-color text-center fw-bold  py-5 header">Update Data </h1>
+            <form class="row p-5 g-4 g-md-3" [formGroup]="UpdatePlayerData" (ngSubmit)="updateData()">
+              
+             
+          <div class="col-md-9 mx-auto p-3 inputs">
+            <input type="text" placeholder="Nick Name" formControlName="Nickname">
+               @if (UpdatePlayerData.get('Nickname')?.errors && UpdatePlayerData.get('Nickname')?.touched) 
+                    {
+                        @if (UpdatePlayerData.get("Nickname")?.getError("required")) {
+                                            <span class="error">Nick name is required</span>
+                                        }
+                                         @else if (UpdatePlayerData.get("Nickname")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (UpdatePlayerData.get("Nickname")?.getError("minlength")) {
+                                            <span class="error">Nick name must be 6 chr. at least !</span>
+                                        }
+                                        @else  if (UpdatePlayerData.get("Nickname")?.getError("maxlength")) {
+                                            <span class="error">Nick name can't be more than 256 chr</span>
+                                        }
+                        
+                    }
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <div class="position-box d-flex justify-content-between">
+             <label for="position" class="fs-5">Position</label>
+        <select
+          id="position"
+          formControlName="PositionId"
+          class="rounded-3 px-2 cursor-pointer fw-bolder bg-black light-color"
+        >
+          <option value="" selected disabled hidden class="light-color">choose player Position</option>
+          @for (position of positions; track $index) {
+            <option [value]="position.value">{{ position.text }}</option>
+          }
+    </select>
+    @if (UpdatePlayerData.get('PositionId')?.errors && UpdatePlayerData.get('PositionId')?.touched) 
+                    {
+                        @if (UpdatePlayerData.get("PositionId")?.getError("required")) {
+                                            <span class="error">Position is required</span>
+                                        }
+                                         
+                    }
+  </div>
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <textarea placeholder="Type Your story" formControlName="StoryAbout"></textarea>
+               @if (UpdatePlayerData.get('StoryAbout')?.errors && UpdatePlayerData.get('StoryAbout')?.touched) 
+                    {
+                        @if (UpdatePlayerData.get("StoryAbout")?.getError("required")) {
+                                            <span class="error">Story About is required</span>
+                                        }
+                                         @else if (UpdatePlayerData.get("StoryAbout")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                         @else if (UpdatePlayerData.get("StoryAbout")?.getError("minlength")) {
+                                            <span class="error">Story About must be 6 chr. at least !</span>
+                                        }
+                                        @else  if (UpdatePlayerData.get("StoryAbout")?.getError("maxlength")) {
+                                            <span class="error">Story About can't be more than 5000 chr</span>
+                                        }
+                        
+                    }
+          </div>
+          <div class="col-md-9 p-3 mx-auto">
+              <textarea placeholder="Type Your Preef About " formControlName="PreefAbout"></textarea>
+               @if (UpdatePlayerData.get('PreefAbout')?.errors && UpdatePlayerData.get('PreefAbout')?.touched) 
+                    {
+                        @if (UpdatePlayerData.get("PreefAbout")?.getError("required")) {
+                                            <span class="error">Preef About is required</span>
+                                        }
+                                         @else if (UpdatePlayerData.get("PreefAbout")?.getError("pattern")) {
+                                            <span class="error">Must be only english letters</span>
+                                        }
+                                         @else if (UpdatePlayerData.get("PreefAbout")?.getError("minlength")) {
+                                            <span class="error">PreefAbout be 5 chr. at least !</span>
+                                        }
+                                        @else  if (UpdatePlayerData.get("PreefAbout")?.getError("maxlength")) {
+                                            <span class="error">PreefAbout  can't be more than 5000 chr</span>
+                                        }
+                        
+                    }
+          </div>
+
+                <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center">
+                    <button class="btn-profile fs-4 cursor-pointer" [disabled]="UpdatePlayerData.invalid">
+                        @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                        Save }
+                    </button>
+                </div>
+            </form>
+        </div>

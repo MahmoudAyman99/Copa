@@ -1,0 +1,119 @@
+        <div class="profile reveal-left position-relative">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="goBack()"></i>
+            <h1 class="fs-1 light-color text-center fw-bold  py-5 header">Modify Address </h1>
+            <form class="row p-5 g-4 g-md-3" [formGroup]="modfyAddress" (ngSubmit)="modifyAddress()">
+                <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                    <input type="text" placeholder="Street" formControlName="street"  [ngClass]="{'error': modfyAddress.get('street')?.errors && modfyAddress.get('street')?.touched}">
+                     @if (modfyAddress.get('street')?.errors && modfyAddress.get('street')?.touched) 
+                    {
+                        @if (modfyAddress.get("street")?.getError("required")) {
+                                            <span class="error">Street is required</span>
+                                        }
+                                         @else if (modfyAddress.get("street")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (modfyAddress.get("street")?.getError("minlength")) {
+                                            <span class="error">Street must be 3 chr. at least !</span>
+                                        }
+                                        @else  if (modfyAddress.get("street")?.getError("maxlength")) {
+                                            <span class="error">Street can't be more than 256 chr</span>
+                                        }
+                        
+                    }
+                    </div>
+                </div>
+                <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                       <input type="text"  placeholder="Regoin" formControlName="regoin" [ngClass]="{'error': modfyAddress.get('regoin')?.errors && modfyAddress.get('regoin')?.touched}">
+                        @if (modfyAddress.get('regoin')?.errors && modfyAddress.get('regoin')?.touched) 
+                    {
+                        @if (modfyAddress.get("regoin")?.getError("required")) {
+                                            <span class="error">Regoin is required</span>
+                                        }
+                                         @else if (modfyAddress.get("regoin")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (modfyAddress.get("regoin")?.getError("minlength")) {
+                                            <span class="error">Regoin must be 3 chr. at least !</span>
+                                        }
+                                        @else  if (modfyAddress.get("regoin")?.getError("maxlength")) {
+                                            <span class="error">Regoin can't be more than 256 chr</span>
+                                        }
+                        
+                    }
+                    </div>
+                    </div>
+                <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                       <input type="text"  placeholder="City" formControlName="city" [ngClass]="{'error': modfyAddress.get('city')?.errors && modfyAddress.get('city')?.touched}">
+                        @if (modfyAddress.get('city')?.errors && modfyAddress.get('city')?.touched) 
+                    {
+                        @if (modfyAddress.get("city")?.getError("required")) {
+                                            <span class="error">City is required</span>
+                                        }
+                                         @else if (modfyAddress.get("city")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (modfyAddress.get("city")?.getError("minlength")) {
+                                            <span class="error">City must be 3 chr. at least !</span>
+                                        }
+                                        @else  if (modfyAddress.get("city")?.getError("maxlength")) {
+                                            <span class="error">City can't be more than 256 chr</span>
+                                        }
+                        
+                    }
+                    </div>
+                    </div>
+                <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                       <input type="text"  placeholder="Governrate" formControlName="governrate" [ngClass]="{'error': modfyAddress.get('governrate')?.errors && modfyAddress.get('governrate')?.touched}">
+                         @if (modfyAddress.get('governrate')?.errors && modfyAddress.get('governrate')?.touched) 
+                    {
+                        @if (modfyAddress.get("governrate")?.getError("required")) {
+                                            <span class="error">Governrate is required</span>
+                                        }
+                                         @else if (modfyAddress.get("governrate")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (modfyAddress.get("governrate")?.getError("minlength")) {
+                                            <span class="error">Governrate must be 3 chr. at least !</span>
+                                        }
+                                        @else  if (modfyAddress.get("governrate")?.getError("maxlength")) {
+                                            <span class="error">Governrate can't be more than 256 chr</span>
+                                        }
+                        
+                    }
+                       </div>
+                    </div>
+                <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                       <input type="text"  placeholder="Country" formControlName="country" [ngClass]="{'error': modfyAddress.get('country')?.errors && modfyAddress.get('country')?.touched}">
+                        @if (modfyAddress.get('country')?.errors && modfyAddress.get('country')?.touched) 
+                    {
+                        @if (modfyAddress.get("country")?.getError("required")) {
+                                            <span class="error">Country is required</span>
+                                        }
+                                         @else if (modfyAddress.get("country")?.getError("pattern")) {
+                                            <span class="error">Special characters like <, >, !, #, %, and $ are not allowed.</span>
+                                        }
+                                         @else if (modfyAddress.get("country")?.getError("minlength")) {
+                                            <span class="error">Country must be 3 chr. at least !</span>
+                                        }
+                                        @else  if (modfyAddress.get("country")?.getError("maxlength")) {
+                                            <span class="error">Country can't be more than 256 chr</span>
+                                        }
+                        
+                    }
+                    </div>
+                </div>
+                <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center">
+                    <button class="btn-profile fs-4 cursor-pointer" [disabled]="modfyAddress.invalid">
+                        @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                        Save }
+                    </button>
+                </div>
+            </form>
+        </div>

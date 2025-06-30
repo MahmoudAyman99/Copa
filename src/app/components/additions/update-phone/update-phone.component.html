@@ -1,0 +1,36 @@
+        <div class="profile reveal-left position-relative">
+            <i class="fa-solid fa-xmark cancel fs-2 cursor-pointer" (click)="goBack()"></i>
+            <h1 class="fs-1 light-color text-center fw-bold  py-5 header">Update Phone Number</h1>
+            <form class="row p-5 g-4 g-md-3" [formGroup]="updatePhone" (ngSubmit)="updateUserPhone()">
+                 @if (errorMsg) 
+                    {
+                        <div class="col-md-7 mx-auto text-center" >
+                        <span class="error fs-5">{{errorMsg}}</span>
+                        </div>
+                    }
+
+                    <div class="col-md-7 mx-auto">
+                    <div class="inputs">
+                    <input type="text" placeholder="Phone Number" formControlName="Phonenumber"  [ngClass]="{'error': updatePhone.get('Phonenumber')?.errors && updatePhone.get('Phonenumber')?.touched}">
+                    @if (updatePhone.get('Phonenumber')?.errors && updatePhone.get('Phonenumber')?.touched) 
+                    {
+                        @if (updatePhone.get("Phonenumber")?.getError("required")) {
+                                            <span class="error">Phone Number is required</span>
+                                        }
+                                        @else if (updatePhone.get("Phonenumber")?.getError("pattern")) {
+                                            <span class="error">Your Phone Number is must be 11 numbers and start with (010/011/015/012)</span>
+                                        }
+                        
+                    }
+                    </div>
+                </div>
+                <div class="col-md-6 mx-auto d-flex justify-content-center align-items-center">
+                    <button class="btn-profile fs-4 cursor-pointer" [disabled]="updatePhone.invalid">
+                        @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                        Save }
+                    </button>
+                </div>
+            </form>
+        </div>

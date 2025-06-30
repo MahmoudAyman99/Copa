@@ -1,0 +1,30 @@
+  <div class="px-4">
+  <h1 class="light-color text-center py-2">All Clubs</h1>
+
+  <div class="table-responsive">
+    <table class="table table-striped w-100 text-center align-middle">
+      <thead>
+        <tr class="head fs-3">
+          <th>Logo</th>
+          <th>Name</th>
+          <th>Players Count</th>
+          <th>Admins Count</th>
+          <th>Manager</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+          @for (club of allClubs; track $index) {
+            <tr class="light-color fs-4">
+          <td><img [src]="club.logoUrl" alt="Club logo" class="logo"></td>
+          <td>{{club.clubName}}</td>
+          <td>{{club.playersCount}}</td>
+          <td>{{club.adminsCount}}</td>
+          <td>{{club.manager}}</td>
+          <td>{{club.status}}</td>
+        </tr>
+          }
+      </tbody>
+    </table>
+  </div>
+</div>

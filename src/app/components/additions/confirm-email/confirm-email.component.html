@@ -1,0 +1,55 @@
+
+  <section class=" d-flex justify-content-center align-items-center" style="height: 100vh;" >
+    <div class="container py-5">
+      <form [formGroup]="confirmEmailForm" (ngSubmit)="verify()">
+        <div class="row">
+          <div class="col-md-10 mx-auto text-center fs-3 light-color">
+            <p>Please Check Your email</p>
+          </div>
+          <div class="col-md-10 mx-auto text-center fs-3 light-color">
+            <p>We have sent A Code to <span class="fw-bolder">{{email}}</span></p>
+          </div>
+          <div class="col-md-8 mx-auto ">
+            @if (errorMsg) {
+              <div class="alert alert-danger rounded-3 mt-2" role="alert">
+                  <p class="fs-5 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Error : {{errorMsg}}</p>
+                </div>
+          }
+          </div>
+          <div class="col-md-8 mx-auto">
+            <div class="d-flex justify-content-between py-3">
+              <input class="animated-input" style="animation-delay: 0s;" #otpInput type="text" maxlength="1" formControlName="num1"
+                (input)="onInput($event, 0)" (keydown)="onKeyDown($event, 0)">
+              <input class="animated-input" style="animation-delay: .3s;" #otpInput type="text" maxlength="1" formControlName="num2"
+                (input)="onInput($event, 1)" (keydown)="onKeyDown($event, 1)">
+              <input class="animated-input" style="animation-delay: .6s;" #otpInput type="text" maxlength="1" formControlName="num3"
+                (input)="onInput($event, 2)" (keydown)="onKeyDown($event, 2)">
+              <input class="animated-input" style="animation-delay: .9s;" #otpInput type="text" maxlength="1" formControlName="num4"
+                (input)="onInput($event, 3)" (keydown)="onKeyDown($event, 3)">
+              <input class="animated-input" style="animation-delay: 1.2s;" #otpInput type="text" maxlength="1" formControlName="num5"
+                (input)="onInput($event, 4)" (keydown)="onKeyDown($event, 4)">
+              <input class="animated-input" style="animation-delay: 1.5s;" #otpInput type="text" maxlength="1" formControlName="num6"
+                (input)="onInput($event, 5)" (keydown)="onKeyDown($event, 5)">
+            </div>
+          </div>
+          <div class="col-md-8 mx-auto">
+            <div class="py-3">
+              <button class="btn-submit w-100 " [disabled]="confirmEmailForm.invalid">
+                @if (loading) {
+                  Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+               } @else {
+                Verify
+               }
+                </button>
+                
+            </div>
+          </div>
+          <div class="col-md-10 mx-auto text-center fs-3 light-color">
+            <div class="py-2">
+              <p>Don't receive an email? <a class="ps-2 light-color" (click)="resend()" >Resend</a></p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>

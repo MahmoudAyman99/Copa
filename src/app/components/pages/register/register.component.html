@@ -1,0 +1,158 @@
+<section>
+    <app-navbar></app-navbar>
+    <div class="all">
+        <div class="register py-5 container d-flex flex-column align-items-center">
+            <div class="py-2">
+                <h1 class="light-color fw-bolder">Register</h1>
+            </div>
+            <div class="w-100">
+                <form class="w-100  " [formGroup]="registerForm" (ngSubmit)="sendData()">
+                    <div class="row pb-4">
+                        <div class="col-md-12">
+                            @if (errorMsg) {
+                                <div class="alert alert-danger rounded-3" role="alert">
+                                    <p class="fs-5 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Error : {{errorMsg}}</p>
+                                  </div>
+                            }
+                        </div>
+                        <div class="col-md-6 g-5">
+                            <div class="px-3">
+                                <input class="mb-1" type="text" placeholder="First Name" formControlName="firstName">
+                                @if (registerForm.get("firstName")?.errors && registerForm.get("firstName")?.touched) {
+                                    <div class="alert alert-danger rounded-3" role="alert">
+                                        @if (registerForm.get("firstName")?.getError("required")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>First Name can't be null or empty !</p>
+                                        }
+                                        @else if (registerForm.get("firstName")?.getError("minlength")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>First Name can't be less than 64 chr.</p>
+                                        }
+                                        @else
+                                        {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>First Name can't be more than 64 chr.</p>
+                                        }
+                                      </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6 g-5">
+                            <div class="px-3">
+                                <input type="text" class="mb-1" placeholder="Last Name" formControlName="lastName">
+                                @if (registerForm.get('lastName')?.errors && registerForm.get('lastName')?.touched) {
+                                    <div class="alert alert-danger rounded-3 " role="alert">
+                                        @if (registerForm.get("lastName")?.getError("required")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Last Name can't be null or empty !</p>
+                                        }
+                                        @else if (registerForm.get("lastName")?.getError("minlength")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Last Name can't be less than 3 chr.</p>
+                                        }
+                                        @else
+                                        {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Last Name can't be more than 64 chr.</p>
+                                        }
+                                      </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6 g-5">
+                            <div class="px-3">
+                                <input type="text" class="mb-1" placeholder="User Name" formControlName="username">
+                                @if (registerForm.get("username")?.errors && registerForm.get("username")?.touched) {
+                                    <div class="alert alert-danger rounded-3 " role="alert">
+                                        @if (registerForm.get("username")?.getError("required")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>User name can't be null or empty !</p>
+                                        }
+                                        @else if (registerForm.get("username")?.getError("pattern")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>your user name must have characters and numbers</p>
+                                        }
+                                      </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6 g-5">
+                            <div class="px-3">
+                                <input type="email" class="mb-1" placeholder="Email" formControlName="email">
+                                @if (registerForm.get("email")?.errors && registerForm.get("email")?.touched) {
+                                    <div class="alert alert-danger rounded-3 " role="alert">
+                                        @if (registerForm.get("email")?.getError("required")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Email can't be null or empty !Email can't be null or empty !</p>
+                                        }
+                                        @else if (registerForm.get("email")?.getError("email")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>your email is invaild</p>
+                                        }
+                                      </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6 g-5">
+                            <div class="px-3">
+                                <input type="password" class="mb-1" placeholder="Password" formControlName="password">
+                                @if (registerForm.get("password")?.errors && registerForm.get("password")?.touched) {
+                                    <div class="alert alert-danger rounded-3 " role="alert">
+                                        @if (registerForm.get("password")?.getError("required")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>password is required</p>
+                                        }
+                                        @else if (registerForm.get("password")?.getError("pattern")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>your password must have at least one capital character and one least  private code and one number from 0 to 9 and can't be less than 8 characters</p>
+                                        }
+                                      </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6 g-5">
+                            <div class="px-3">
+                                @if ( registerForm.hasError('passwordMatch') && registerForm.get('confirmationPassword')?.touched) {
+                                    <div class="alert alert-danger rounded-3 " role="alert">
+                                        <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Confirm Password not match</p>
+                                      </div>
+                                }
+                                <input type="password" class="mb-1" placeholder="Confirm Password" formControlName="confirmationPassword">
+                                @if (registerForm.get("confirmationPassword")?.errors && registerForm.get("confirmationPassword")?.touched) {
+                                    <div class="alert alert-danger rounded-3 " role="alert">
+                                        @if (registerForm.get("confirmationPassword")?.getError("required")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Confirm password is required</p>
+                                        }
+                                        @else if (registerForm.get("confirmationPassword")?.getError("pattern")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>your Confirm password must have at least one capital character and one least  private code and one number from 0 to 9 and can't be less than 8 characters</p>
+                                        }
+                                      </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-6 g-5 mx-auto">
+                            <label for="birthDate" class="light-color fs-5 pb-2">Birth Date:</label>
+                            <input type="date" name="birthDate" formControlName="birthDate">
+                            @if (registerForm.get("birthDate")?.errors && registerForm.get("birthDate")?.touched) {
+                                    <div class="alert alert-danger rounded-3 mt-1 " role="alert">
+                                        @if (registerForm.get("birthDate")?.getError("required")) {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>BirthDate is required</p>
+                                        }
+                                        @else  {
+                                            <p class="fs-6 mb-0"><i class="fa-solid fa-triangle-exclamation mx-2"></i>Your age must be over 4 years and below 85 years</p>
+                                        }
+                                      </div>
+                                }
+                        </div>
+                    </div>
+                    
+                    <div class=" mt-5 text-center light-color ">
+                        <p>
+                            Already have an account . 
+                            <a routerLink="/login">sign in here!</a>
+                        </p>
+                    </div>
+                    <div class=" my-2 text-center">
+                        <button  class="btn-submit" [disabled]="registerForm.invalid">
+                            @if (loading) {
+                                Loading...<i class="fa-solid fa-spin fa-spinner"></i>
+                             } @else {
+                                Creat Account
+                             }
+                        </button>
+                    </div>
+                    
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</section>
