@@ -69,8 +69,6 @@ export class ClubDetailsComponent  {
       this._Router.navigate([this.previousPage]);
     }
 
-     goToPlayerDetails(id :number){
-        this._NavigationService.goToDetails(id);
-    }
+  
 
 }
