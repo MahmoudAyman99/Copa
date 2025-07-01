@@ -30,7 +30,7 @@ export class RegisterComponent {
     confirmationPassword : new FormControl(null , [Validators.required ,  Validators.maxLength(64) , Validators.pattern(/^(?=.*[0-9])(?=.*[\!@#$%^&*()_+{}\[\]:;<>,.?/~`|\\-])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ ) ]),
     birthDate: new FormControl(null, [
   Validators.required,
-  this.dateRangeValidator( 1940 ,2021)
+  this.dateRangeValidator( 1940 ,2016)
 ])
 
   } , this.checkPassword)

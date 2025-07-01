@@ -71,7 +71,7 @@ export class CreatePlayerComponent {
       PositionId: new FormControl('', Validators.required),
       birthDate: new FormControl('', [
         Validators.required,
-        this.dateRangeValidator(1980, 2020),
+        this.dateRangeValidator(1980, 2015),
       ]),
       ContractDuration: new FormControl('', [
         Validators.required,
